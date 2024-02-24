@@ -1,0 +1,13 @@
+.bg-primary, .primary{
+    color: #2c56ab;
+}
+.secondary{
+    color: #008200;
+}
+.white{
+    color: #fff;
+}
+.brand-logo{
+    height: 50px;
+    width: 100px;
+}
