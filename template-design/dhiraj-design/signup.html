@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberCafe | Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../design/bootstrap/css/bootstrap.min.css">
+  <style>
+    #signup {
+      background-color: #ffffff;
+      border-radius: 7px;
+      padding: 30px;
+      width: 40%;
+      position: relative;
+      top: 90px;
+      height: 600px;
+    }
+
+    .auth {
+      position: absolute;
+      z-index: -1;
+      height: 100vh;
+    }
+
+    @media screen and (max-width: 1200px) {
+      #signup {
+        width: 80%;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      #signup {
+        width: 90%;
+        top: 100px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="d-flex flex-wrap justify-content-center py-3 bg-primary">
+    <a href="/" class="d-flex align-items-center mb-3 ms-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img class="brand-logo" src="../../image/CyberCafe-white.png" alt="CyberCafe">
+    </a>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="#" class="nav-link"><i class="fa-solid fa-cart-plus white"></i> <span
+            class="white">cart</span></a></li>
+      <li class="nav-item"><a href="#" class="nav-link"><i class="fa-solid fa-user white"></i> <span
+            class="white">Account</span></a></li>
+    </ul>
+  </header>
+  <div class="main">
+    <img src="../../image/auth.jpg" class="auth img-fluid w-100" alt="">
+  </div>
+  <div class="container-fluid d-flex justify-content-center">
+
+    <form id="signup" action="" method="post">
+      <h2 class="bg-primary p-2 white text-center">CyberCafe</h2>
+      <div class="row g-3 my-2">
+        <div class="col-md-6">
+            <label for="firstname" class="form-label">FirstName</label>
+            <input type="text" class="form-control" id="firstname">
+            <span class="text-danger">Please enter a valid password!</span>
+          </div>
+          <div class="col-md-6">
+            <label for="lastname" class="form-label">LastName</label>
+            <input type="text" class="form-control" id="lastname">
+            <span class="text-danger">Please enter a valid password!</span>
+          </div>
+          <div class="col-md-12">
+            <label for="formGroupExampleInput" class="form-label">Email</label>
+            <input type="text" class="form-control" id="formGroupExampleInput">
+            <span class="text-danger">Please enter a valid email!</span>
+          </div>
+          <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input type="text" class="form-control" id="password">
+            <span class="text-danger">Please enter a valid password!</span>
+          </div>
+          <div class="col-md-6">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="text" class="form-control" id="confirmPassword">
+            <span class="text-danger">Please enter a valid password!</span>
+          </div>
+      </div>
+      
+      
+      <p class="text-end mt-2"><a class="" href="login.html">Already have an account?</a></p>
+      <button type="submit" class="btn btn-outline-primary mt-4 w-100 p-3">Sign Up</button>
+    </form>
+
+  </div>
+
+</body>
+<script src="https://kit.fontawesome.com/cbeb993ef9.js" crossorigin="anonymous"></script>
+<script src="../../design/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</html>
