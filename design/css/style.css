@@ -1,0 +1,145 @@
+:root {
+    --bs-primary-rgb: 226, 144, 20;
+    --bs-bg-opacity: 0.8;
+    --bs-success-rgb: 62, 159, 51;
+}
+.primary{
+    color: var(--bs-primary-rgb) !important;
+}
+.bg-primary {
+    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
+.bg-success {
+    background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+}
+.brand-logo{
+    height: 50px;
+    width: 100px;
+}
+
+.bg-image{
+    background: url("../../image/cofee-mobile-crop.jpg");
+    background-size: cover;
+}
+
+/* Footer social icon */
+
+.social-list{
+    list-style: none;
+    padding: 0;
+}
+.social-list-item{
+    display: inline;
+    margin: 0 10px;
+}
+
+/* Login */
+#login {
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 30px;
+    width: 40%;
+    height: 500px;
+}
+
+.bg-image{
+    background: url("../../image/cofee-mobile-crop.jpg");
+    background-size: cover;
+}
+
+@media screen and (max-width: 1200px) {
+    #login {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #login {
+        width: 90%;
+        top: 100px;
+    }
+}
+
+/* Forgot-Password */
+#forgot-password {
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 30px;
+    width: 40%;
+    height: 350px;
+}
+
+.bg-image{
+    background: url("../../image/cofee-mobile-crop.jpg");
+    background-size: cover;
+}
+
+
+@media screen and (max-width: 1200px) {
+    #forgot-password {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #forgot-password {
+        width: 90%;
+        top: 100px;
+        height: 400px;
+    }
+}
+
+/* Sign Up */
+#signup {
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 30px;
+    width: 40%;
+    height: 600px;
+}
+
+.bg-image{
+    background: url("../../image/cofee-mobile-crop.jpg");
+    background-size: cover;
+}
+
+@media screen and (max-width: 1200px) {
+    #signup {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #signup {
+        width: 90%;
+        top: 100px;
+    }
+}
+
+/* Register */
+#signup {
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 30px;
+    width: 40%;
+    height: 600px;
+}
+
+.bg-image{
+    background: url("../../image/cofee-mobile-crop.jpg");
+    background-size: cover;
+}
+
+@media screen and (max-width: 1200px) {
+    #signup {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #signup {
+        width: 90%;
+        top: 100px;
+        height: 800px;
+    }
+}
