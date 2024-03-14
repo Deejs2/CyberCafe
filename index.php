@@ -11,6 +11,7 @@ $GLOBALS["menuLink"] = "?page=menu";
     <title>CyberCafe | <?php echo ucfirst($page)?></title>
     <link rel="stylesheet" href="design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
+    <link rel="stylesheet" href="design/css/landing.css">
 </head>
 <body>
 
