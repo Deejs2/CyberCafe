@@ -11,6 +11,12 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
+            <a class="nav-link" href="?page=analytics">
+                <i class="fa-solid fa-magnifying-glass-chart fs-6"></i><span>Analytics</span>
+            </a>
+        </li><!-- End Customer Nav -->
+
+        <li class="nav-item">
             <a class="nav-link" href="?page=customer">
                 <i class="fa-solid fa-people-group"></i><span>Customer</span>
             </a>
@@ -18,17 +24,22 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa-brands fa-product-hunt"></i>Product</span><i class="fa-solid fa-caret-down ms-auto"></i>
+                <i class="fa-brands fa-product-hunt"></i>Product<i class="fa-solid fa-caret-down ms-auto"></i>
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="?page=product&&action=create">
-                        <i class="fa-regular fa-square-plus fs-6"></i>Create Products</span>
+                        <i class="fa-regular fa-square-plus fs-6"></i>Create Products
                     </a>
                 </li>
                 <li>
                     <a href="?page=product&&action=view">
-                        <i class="fa-regular fa-eye fs-6"></i>View All Product</span>
+                        <i class="fa-regular fa-eye fs-6"></i>View All Product
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=product&&action=category">
+                        <i class="fa-solid fa-screwdriver-wrench fs-6"></i>Manage Product Categories
                     </a>
                 </li>
             </ul>
@@ -36,12 +47,12 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa-solid fa-file-signature"></i>Order</span><i class="fa-solid fa-caret-down ms-auto"></i>
+                <i class="fa-solid fa-file-signature"></i>Order<i class="fa-solid fa-caret-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="?page=order&&action=view">
-                        <i class="fa-solid fa-bell-concierge fs-6"></i>Recent Orders</span>
+                        <i class="fa-regular fa-eye fs-6"></i>View All Orders
                     </a>
                 </li>
             </ul>
@@ -59,7 +70,7 @@
                 </li>
                 <li>
                     <a href="?page=user&&action=users">
-                        <i class="fa-regular fa-eye fs-6"></i></i><span>Users</span>
+                        <i class="fa-regular fa-eye fs-6"></i><span>Users</span>
                     </a>
                 </li>
             </ul>
