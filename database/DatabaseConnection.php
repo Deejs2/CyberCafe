@@ -2,7 +2,7 @@
 $serverName = "127.0.0.1";
 $userName = "root";
 $password = "";
-$database = "cybercafe";
+$database = "cyber_cafe";
 
 //create connection
 $connection = new mysqli($serverName, $userName, $password);
@@ -28,7 +28,7 @@ if (!$connection->select_db($database)) {
 // Connect to the specific database
 $connection->select_db($database);
 
-echo "Connected successfully";
+// echo "Connected successfully";
 
 // Close the connection (optional, depending on your needs)
-$connection->close();
+// $connection->close();
