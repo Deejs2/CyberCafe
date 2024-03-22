@@ -127,14 +127,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Update Query for product
     $statement = $connection->prepare("UPDATE product SET product_name = ?, product_description = ?, product_price = ?, category_id = ?, product_image = ? WHERE product_id = ?");
-    $statement->bind_param("ssissi", $productName, $productDescription, $productPrice, $category, $target_file, $productId);
+    $statement->bind_param("ssdssi", $productName, $productDescription, $productPrice, $category, $target_file, $productId);
     $statement->execute();
-    // if ($statement->execute() === false) {
-    //     die('Error: ' . $statement->error);
-    // } else {
+  
         //Show a message when the Product is updated
         echo "<script>alert('Data updated successfully');</script>";
-    // }
 
     $connection->close();
 }
