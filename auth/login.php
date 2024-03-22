@@ -3,17 +3,17 @@
 
 <div class="container-fluid d-flex justify-content-center">
 
-    <form id="login" action="" method="post">
+    <form id="login" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=auth" method="post">
         <h2 class="bg-primary p-2 text-white text-center">CyberCafe</h2>
         <div class="mt-5">
             <label for="formGroupExampleInput" class="form-label">Email</label>
-            <input type="text" class="form-control" id="formGroupExampleInput">
-            <span class="text-danger">Please enter a valid email!</span>
+            <input type="text" name="email" class="form-control" id="formGroupExampleInput">
+            <span class="text-danger"><?php if(isset($error)){echo "Please enter a valid email!";} ?></span>
         </div>
         <div class="mt-4">
             <label for="formGroupExampleInput2" class="form-label">Password</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2">
-            <span class="text-danger">Please enter a valid password!</span>
+            <input type="text" name="password" class="form-control" id="formGroupExampleInput2">
+            <span class="text-danger"><?php if(isset($error)){echo "Please enter a valid password!";} ?></span>
         </div>
         <div class="d-flex justify-content-between mt-2">
             <p class="text-start"><a class="" href="?page=auth&&action=register">Request for an account?</a></p>

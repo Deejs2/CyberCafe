@@ -1,14 +1,36 @@
 <?php
+
+use model\User;
+
+session_start();
 require "../database/DatabaseConnection.php";
+include "../model/User.php";
 
 $page = $_GET["page"] ?? "";
 $action = $_GET["action"] ?? "Login";
 $GLOBALS["menuLink"] = "../?page=menu";
 
-if(isset($_POST["login"])){
-    header("Location: ../admin/dashboard.php");
-    exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+//create an instance of the user class
+    $user = new User($connection);
+    $authenticatedUser = $user->authenticateUser($email, $password);
+
+    if ($authenticatedUser) {
+        // User authenticated successfully
+        $_SESSION["user_id"] = $authenticatedUser["id"];
+        $_SESSION["fullname"] = $authenticatedUser["fullname"];
+        $_SESSION["email"] = $authenticatedUser["email"];
+        header("Location: ../admin/?page=dashboard");
+        exit();
+    } else {
+        // Authentication failed
+        $error = "Invalid username or password.";
+    }
 }
+
 
 ?>
 

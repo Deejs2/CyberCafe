@@ -1,7 +1,15 @@
 
-<div class="masterhead" >
-    <div class="color-overlay">
-        <h1>Our Menu</h1>
+<div class="bg-image px-4 py-5">
+    <div class="py-5">
+          <span class="display-5">
+            <nav>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                      <span class="display-5 text-white">Our Menu</span>
+                  </li>
+                </ol>
+            </nav>
+          </span>
     </div>
 </div>
 
@@ -9,24 +17,14 @@
 <div class="container my-4 position-relative">
     <!-- <button class="position-absolute top-70 start-0 translate-middle-y btn btn-secondary arrow custom-padding mt-5" type="button" onclick="LeftScroll()">&lt;</button> -->
     <div class="row flex-nowrap overflow-auto py-3 m-auto">
-        <div class="col-auto text-center mb-2">
-            <button class="btn btn-primary w-100" type="button">All</button>
-        </div>
-        <div class=" col text-center mb-2">
-            <button class="btn btn-primary w-100" type="button">Appetizers</button>
-        </div>
-        <div class=" col text-center mb-2">
-            <button class="btn btn-primary w-100" type="button">Breakfast</button>
-        </div>
-        <div class=" col-auto text-center mb-2">
-            <button class="btn btn-primary w-100" type="button">Main Courses</button>
-        </div>
-        <div class=" col-auto text-center mb-2">
-            <button class="btn btn-primary w-100" type="button">Classic Desserts</button>
-        </div>
-        <div class=" col text-center mb-2">
-            <button class="btn btn-primary w-100" type="button">Drinks</button>
-        </div>
+        <?php
+            $categories = $category->getActiveCategories();
+            foreach ($categories as $cat) {
+                echo "<div class='col text-center mb-2'>
+                        <button class='btn btn-primary w-100' type='button'>$cat[food_category_name]</button>
+                      </div>";
+            }
+        ?>
     </div>
     <!-- <button class="position-absolute top-70 end-0 translate-middle-y btn btn-secondary arrow mt-5" type="button" onclick="scrollRight()">&gt;</button> -->
 </div>

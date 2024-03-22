@@ -1,7 +1,12 @@
 <?php
+include "database/DatabaseConnection.php";
 $page = $_GET["page"] ?? "menu";
 $action = $_GET["action"] ?? "";
 $GLOBALS["menuLink"] = "?page=menu";
+
+use model\FoodCategory;
+include "model/FoodCategory.php";
+$category = new FoodCategory($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
