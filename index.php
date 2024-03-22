@@ -5,8 +5,12 @@ $action = $_GET["action"] ?? "";
 $GLOBALS["menuLink"] = "?page=menu";
 
 use model\FoodCategory;
+use model\FoodItem;
+
 include "model/FoodCategory.php";
 $category = new FoodCategory($connection);
+include "model/FoodItem.php";
+$foodItem = new FoodItem($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +29,13 @@ $category = new FoodCategory($connection);
 <?php
 switch($page){
     case "menu":
-        include "menu.php";
-        break;
+        if($action == "filter"){
+            include "food-category-list.php";
+            break;
+        } else {
+            include "menu.php";
+            break;
+        }
 
     case "cart":
         include "cart.php";
