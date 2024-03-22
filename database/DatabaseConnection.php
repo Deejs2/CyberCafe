@@ -18,7 +18,7 @@ if (!$connection->select_db($database)) {
     $createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS $database";
 
     if ($connection->query($createDatabaseQuery) === TRUE) {
-        echo "Database created successfully. ";
+        echo "<script>console.log('Database created successfully')</script>";
     } else {
         echo "Error creating database: " . $connection->error;
         die();
@@ -28,7 +28,7 @@ if (!$connection->select_db($database)) {
 // Connect to the specific database
 $connection->select_db($database);
 
-// echo "Connected successfully";
+echo "<script>console.log('Connected to the database successfully')</script>";
 
-// Close the connection (optional, depending on your needs)
-// $connection->close();
+//// Close the connection (optional, depending on your needs)
+//$connection->close();

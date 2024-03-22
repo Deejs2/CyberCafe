@@ -1,15 +1,15 @@
-
 <?php include "common/menu-header.php"?>
 
 <!-- Card Display -->
 <div class="container pb-5">
-    <?php
-    foreach ($categories as $cat) {
-        ?>
-        <h3 class="mt-5"><?php echo $cat['food_category_name']; ?></h3>
+        <h3 class="mt-5">
+            <?php
+            $cat = $category->getCategoryById($_GET['categoryId']);
+            echo $cat['food_category_name']; ?>
+        </h3>
         <div class="row row-cols-1 row-cols-md-3 g-4 my-2">
             <?php
-            $foodItems = $foodItem->getItemsByCategory($cat['food_category_id']);
+            $foodItems = $foodItem->getItemsByCategory($_GET['categoryId']);
             if ($foodItems != null) {
                 foreach ($foodItems as $food) {
                     ?>
@@ -39,9 +39,6 @@
             }
             ?>
         </div>
-        <?php
-    }
-    ?>
 </div>
 
 <script>
