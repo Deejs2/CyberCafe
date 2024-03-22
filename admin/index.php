@@ -1,7 +1,18 @@
 <?php
+ob_start(); // Start output buffering
+
+session_start();
+use model\FoodCategory;
+
+include "../database/DatabaseConnection.php";
+include "../model/FoodCategory.php";
+
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
 $GLOBALS["menuLink"] = "?page=dashboard";
+
+$category = new FoodCategory($connection);
+$categories = $category->getAllCategories();
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +65,19 @@ $GLOBALS["menuLink"] = "?page=dashboard";
 
             case "recent-activity":
                 include "recent-activity.php";
+                break;
+
+            case "food-categories":
+                if($action == "create"){
+                    include "food-categories/food-category-create.php";
+                } else if($action == "edit"){
+                    include "food-categories/food-category-edit.php";
+                }else if($action == "delete"){
+                    include "food-categories/food-category-delete.php";
+                }
+                else {
+                    include "food-categories/food-category-list.php";
+                }
                 break;
 
             default:
