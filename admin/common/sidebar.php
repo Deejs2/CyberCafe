@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="?page=product&&action=view">
+                    <a href="?page=product">
                         <i class="fa-regular fa-eye fs-6"></i>View All Product
                     </a>
                 </li>

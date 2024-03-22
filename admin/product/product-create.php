@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $connection->close();
 
      // Redirect to the same page or another page
-     header("Location: product.php");
+     header("Location: product-create.php");
      exit;
 }
 ?>

@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 ?>
 
 
-  <form action="productTable.php" method="POST"  enctype="multipart/form-data">
+  <form action="product-list.php" method="POST" enctype="multipart/form-data">
     <div class="container justify-content-center">
   <div class="row mb-3 mt-3">
   <input type="hidden" name="productId" value="<?= $product['product_id'] ?? ''; ?>">

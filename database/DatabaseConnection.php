@@ -2,7 +2,7 @@
 $serverName = "127.0.0.1";
 $userName = "root";
 $password = "";
-$database = "cyber_cafe";
+$database = "cybercafe";
 
 //create connection
 $connection = new mysqli($serverName, $userName, $password);
