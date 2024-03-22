@@ -33,12 +33,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="?page=product&&action=view">
+                    <a href="?page=product">
                         <i class="fa-regular fa-eye fs-6"></i>View All Product
                     </a>
                 </li>
                 <li>
-                    <a href="?page=product&&action=category">
+                    <a href="?page=food-categories&&action=create">
                         <i class="fa-solid fa-screwdriver-wrench fs-6"></i>Manage Product Categories
                     </a>
                 </li>
