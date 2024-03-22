@@ -10,17 +10,22 @@ class User
         $this->conn = $conn;
     }
 
-    public function authenticateUser($email, $password){
-        $sql = "SELECT * FROM tbl_users WHERE email = ? AND password = ?";
+    function authenticateUser($email, $password) {
+        // Retrieve hashed password from the database based on the provided email
+        $sql = "SELECT password FROM tbl_users WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ss", $email, $password);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->bind_result($hashed_password);
+        $stmt->fetch();
+        $stmt->close();
 
-        if ($result->num_rows == 1) {
-            return $result->fetch_assoc();
+        // Verify hashed password against the password submitted in the form
+        if ($hashed_password && password_verify($password, $hashed_password)) {
+            // Passwords match, user is authenticated
+            return true;
         } else {
-            // Authentication failed
+            // Passwords don't match, authentication failed
             return false;
         }
     }

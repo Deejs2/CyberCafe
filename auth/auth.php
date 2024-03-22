@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
 //create an instance of the user class
     $user = new User($connection);
     $authenticatedUser = $user->authenticateUser($email, $password);

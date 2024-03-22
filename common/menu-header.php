@@ -14,7 +14,7 @@
 
 <!-- Menu Navigation -->
 <div class="container my-4">
-    <div class="row overflow-auto py-3 m-auto">
+    <div class="row flex-nowrap overflow-auto py-3 m-auto">
         <div class='col text-center mb-2'>
             <a href='?page=menu' class='btn btn-primary w-100'>All</a>
         </div>
