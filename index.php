@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(isset($_GET["table"])){
+    $_SESSION["table"] = $_GET["table"];
+}
+if(!isset($_SESSION["table"])){
+    header("Location: select-table.php");
+    exit();
+}
 include "database/DatabaseConnection.php";
 $page = $_GET["page"] ?? "menu";
 $action = $_GET["action"] ?? "";

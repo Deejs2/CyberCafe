@@ -15,16 +15,16 @@
                     ?>
                     <div class="col">
                         <div class="card h-100">
-                            <img src="image/burger.jpg" class="card-img-top" alt="...">
+                            <img src="admin/product/uploads/<?php echo $food['food_item_image']?>" class="card-img-top" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title"><b><?php echo $food['food_item_name']; ?></b></h5>
                                 <p class="card-text"><?php echo $food['food_item_description']; ?></p>
                                 <div class="input-group px-4">
                                     <span class="input-group-text">Quantity</span>
-                                    <input type="number" min="1" max="20" class="form-control quantity-input" data-price="<?php echo $food['food_item_price']; ?>">
+                                    <input type="number" min="1" max="20" class="form-control quantity-input" data-price="<?php echo $food['food_item_price']; ?>" value="1">
                                 </div>
                                 <div class="p-2">
-                                    <p class="card-text" id="card-text">Price: $<?php echo $food['food_item_price']; ?></p>
+                                    <p class="card-text" id="card-text">Price: NRS<?php echo $food['food_item_price']; ?></p>
                                 </div>
                                 <div class="mt-2 d-grid gap-2 d-md">
                                     <button class="btn btn-primary order">Order</button>
@@ -50,7 +50,7 @@
             let quantity = parseInt(this.value) || 1;
             let price = parseFloat(this.getAttribute('data-price'));
             let totalPrice = quantity * price;
-            this.closest('.card-body').querySelector('#card-text').textContent = "Price: $" + totalPrice.toFixed(2);
+            this.closest('.card-body').querySelector('#card-text').textContent = "Price: NRS" + totalPrice.toFixed(2);
         });
     });
 </script>

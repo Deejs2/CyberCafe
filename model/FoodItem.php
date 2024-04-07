@@ -11,13 +11,13 @@ class FoodItem
     }
 
     // Function to create a new item
-    public function createItem($itemName, $itemPrice, $itemCategory) {
+    public function createItem($itemName, $itemDescription, $itemPrice, $itemCategory, $itemImage, $itemStatus) {
         // Prepare the SQL statement
-        $sql = "INSERT INTO tbl_food_items (food_item_name, food_item_price, food_category_id) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO tbl_food_items (food_item_name, food_item_description, food_item_price, food_category_id, food_item_image, food_item_status) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
 
         // Bind the parameters
-        $stmt->bind_param("sdi", $itemName, $itemPrice, $itemCategory);
+        $stmt->bind_param("ssdisi", $itemName, $itemDescription, $itemPrice, $itemCategory, $itemImage, $itemStatus);
 
         // Execute the statement
         if ($stmt->execute()) {
@@ -52,19 +52,19 @@ class FoodItem
     }
 
     // Function to update an item by ID
-    public function updateItem($itemId, $itemName, $itemPrice, $itemCategory) {
+    public function updateItem($itemId, $itemName, $itemDescription, $itemPrice, $itemCategory, $itemImage, $itemStatus) {
         // Prepare the SQL statement
-        $sql = "UPDATE tbl_food_items SET food_item_name = ?, food_item_price = ?, food_category_id = ? WHERE food_item_id = ?";
+        $sql = "UPDATE tbl_food_items SET food_item_name = ?, food_item_description = ?, food_item_price = ?, food_category_id = ?, food_item_image = ?, food_item_status = ? WHERE food_item_id = ?";
         $stmt = $this->conn->prepare($sql);
 
         // Bind parameters
-        $stmt->bind_param("sdi", $itemName, $itemPrice, $itemCategory, $itemId);
+        $stmt->bind_param("sssisii", $itemName, $itemDescription, $itemPrice, $itemCategory, $itemImage, $itemStatus, $itemId);
 
         // Execute the statement
         if ($stmt->execute()) {
-            return true; // Update successful
+            return true; // Item updated successfully
         } else {
-            return false; // Update failed
+            return false; // Item update failed
         }
     }
 
@@ -75,4 +75,18 @@ class FoodItem
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Function to retrieve an item by ID
+    public function getItemById($itemId) {
+        // Prepare the SQL statement
+        $sql = "SELECT * FROM tbl_food_items WHERE food_item_id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind the parameter
+        $stmt->bind_param("i", $itemId);
+
+        // Execute the statement
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
 }

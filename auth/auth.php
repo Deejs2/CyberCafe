@@ -22,9 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($authenticatedUser) {
         // User authenticated successfully
-        $_SESSION["user_id"] = $authenticatedUser["id"];
-        $_SESSION["fullname"] = $authenticatedUser["fullname"];
-        $_SESSION["email"] = $authenticatedUser["email"];
+        //here store the user email in a session
+        $_SESSION["email"] = $email;
         header("Location: ../admin/?page=dashboard");
         exit();
     } else {
