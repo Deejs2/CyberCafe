@@ -4,6 +4,7 @@ session_start();
 
 use model\FoodCategory;
 use model\FoodItem;
+use model\User;
 
 if(!isset($_SESSION["email"])){
     header("Location: ../auth/auth.php?page=auth");
@@ -13,6 +14,7 @@ if(!isset($_SESSION["email"])){
 include "../database/DatabaseConnection.php";
 include "../model/FoodCategory.php";
 include "../model/FoodItem.php";
+include "../model/User.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
@@ -21,6 +23,7 @@ $GLOBALS["menuLink"] = "?page=dashboard";
 $category = new FoodCategory($connection);
 $product = new FoodItem($connection);
 $categories = $category->getAllCategories();
+$user = new User($connection);
 ?>
 
 <!DOCTYPE html>

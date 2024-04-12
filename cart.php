@@ -1,7 +1,7 @@
 <?php include "common/breadcrumb.php"?>
 <div class="container my-3 border shadow rounded-3 p-3">
     <div class="table-responsive text-center">
-        <h2 class="my-3 p-3 bg-success text-white">Your Cart</h2>
+        <h2 class="my-3 p-3 bg-primary text-white">Your Cart</h2>
         <table class="table align-middle">
             <thead>
             <tr>

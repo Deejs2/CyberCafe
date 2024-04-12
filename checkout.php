@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Proceed</button>
+                    <button type="submit" class="btn bg-primary text-white">Proceed</button>
                 </div>
             </form>
 

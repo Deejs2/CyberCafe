@@ -24,7 +24,7 @@
             <p class="text-start"><a class="" href="?page=auth&&action=register">Request for an account?</a></p>
             <p class="text-end"><a class="" href="?page=auth&&action=forgot-password">Forgot password?</a></p>
         </div>
-        <button type="submit" name="login" class="btn btn-outline-primary mt-4 w-100 p-3">Login</button>
+        <button type="submit" name="login" class="btn bg-primary text-white mt-4 w-100 p-3">Login</button>
     </form>
 
 </div>

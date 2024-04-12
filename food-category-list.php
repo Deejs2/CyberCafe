@@ -27,7 +27,7 @@
                                     <p class="card-text" id="card-text">Price: NRS<?php echo $food['food_item_price']; ?></p>
                                 </div>
                                 <div class="mt-2 d-grid gap-2 d-md">
-                                    <button class="btn btn-primary order">Order</button>
+                                    <button class="btn bg-primary text-white order">Order</button>
                                 </div>
                             </div>
                         </div>

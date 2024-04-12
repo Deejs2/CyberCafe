@@ -16,13 +16,13 @@
 <div class="container my-4">
     <div class="row flex-nowrap overflow-auto py-3 m-auto">
         <div class='col text-center mb-2'>
-            <a href='?page=menu' class='btn btn-primary w-100'>All</a>
+            <a href='?page=menu' class='btn bg-primary text-white w-100'>All</a>
         </div>
         <?php
         $categories = $category->getActiveCategories();
         foreach ($categories as $cat) {
             echo "<div class='col text-center mb-2'>
-                    <a href='?page=menu&&action=filter&&categoryId=$cat[food_category_id]' class='btn btn-primary w-100'>$cat[food_category_name]</a>
+                    <a href='?page=menu&&action=filter&&categoryId=$cat[food_category_id]' class='btn bg-primary text-white w-100'>$cat[food_category_name]</a>
                   </div>";
         }
         ?>
