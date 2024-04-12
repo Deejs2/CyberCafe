@@ -1,13 +1,20 @@
 <?php
 ob_start(); // Start output buffering
-
 session_start();
+
 use model\FoodCategory;
 use model\FoodItem;
+use model\User;
+
+if(!isset($_SESSION["email"])){
+    header("Location: ../auth/auth.php?page=auth");
+    exit();
+}
 
 include "../database/DatabaseConnection.php";
 include "../model/FoodCategory.php";
 include "../model/FoodItem.php";
+include "../model/User.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
@@ -16,6 +23,7 @@ $GLOBALS["menuLink"] = "?page=dashboard";
 $category = new FoodCategory($connection);
 $product = new FoodItem($connection);
 $categories = $category->getAllCategories();
+$user = new User($connection);
 ?>
 
 <!DOCTYPE html>
@@ -110,11 +118,77 @@ $categories = $category->getAllCategories();
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i></a>
 
+</body>
 <!-- Vendor JS Files -->
 <script src="../design/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="design/js/main.js"></script>
 <script src="https://kit.fontawesome.com/cbeb993ef9.js" crossorigin="anonymous"></script>
+<script>
 
-</body>
+    /**
+     * Template Name: NiceAdmin
+     * Updated: Jan 29 2024 with Bootstrap v5.3.2
+     * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+     * Author: BootstrapMade.com
+     * License: https://bootstrapmade.com/license/
+     */
+    (function() {
+        "use strict";
 
+        /**
+         * Easy selector helper function
+         */
+        const select = (el, all = false) => {
+            el = el.trim()
+            if (all) {
+                return [...document.querySelectorAll(el)]
+            } else {
+                return document.querySelector(el)
+            }
+        }
+
+        /**
+         * Easy event listener function
+         */
+        const on = (type, el, listener, all = false) => {
+            if (all) {
+                select(el, all).forEach(e => e.addEventListener(type, listener))
+            } else {
+                select(el, all).addEventListener(type, listener)
+            }
+        }
+
+        /**
+         * Sidebar toggle
+         */
+        if (select('.toggle-sidebar-btn')) {
+            on('click', '.toggle-sidebar-btn', function(e) {
+                select('body').classList.toggle('toggle-sidebar')
+            })
+        }
+
+        /**
+         * Search bar toggle
+         */
+        if (select('.search-bar-toggle')) {
+            on('click', '.search-bar-toggle', function(e) {
+                select('.search-bar').classList.toggle('search-bar-show')
+            })
+        }
+
+        /**
+         * Autoresize echart charts
+         */
+        const mainContainer = select('#main');
+        if (mainContainer) {
+            setTimeout(() => {
+                new ResizeObserver(function() {
+                    select('.echart', true).forEach(getEchart => {
+                        echarts.getInstanceByDom(getEchart).resize();
+                    })
+                }).observe(mainContainer);
+            }, 200);
+        }
+
+    })();
+</script>
 </html>

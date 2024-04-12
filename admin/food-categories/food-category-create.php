@@ -16,6 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'create') {
         $categoryStatus = 1;
         if ($category->createCategory($categoryName, $categoryStatus)) {
             echo "Category created successfully.";
+            header("Location: ?page=food-categories&&action=create");
         } else {
             echo "Failed to create category.";
         }

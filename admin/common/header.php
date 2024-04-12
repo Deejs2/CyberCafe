@@ -96,7 +96,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6><?php if(isset($_SESSION["email"])){echo $_SESSION["email"];} ?></h6>
-                        <span>Web Designer</span>
+                        <span><?php $userRole = $user->getUserByEmail($_SESSION['email']); echo $userRole['role']; ?></span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
