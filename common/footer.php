@@ -2,8 +2,9 @@
     <div class="row mx-5 m-2">
         <div class="col">
             <h3>Contact Us</h3>
-            <p>123 Main Street, Uni 21, New York City</p>
-            <p>+38 (012) 34 56 789</p>
+            <p>Chabahil, Kathmandu, Nepal</p>
+            <p>+977 9837483748</p>
+            <p>cybercafe@gmail.com</p>
         </div>
         <div class="col text-end">
             <h3>Follow Us</h3>

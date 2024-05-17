@@ -1,4 +1,5 @@
-<?php include "common/menu-header.php"?>
+<?php global $category, $foodItem;
+include "common/menu-header.php"?>
 
 <!-- Card Display -->
 <div class="container pb-5">
@@ -21,7 +22,9 @@
                                 <p class="card-text"><?php echo $food['food_item_description']; ?></p>
                                 <div class="input-group px-4">
                                     <span class="input-group-text">Quantity</span>
-                                    <input type="number" placeholder="1" min="1" max="20" class="form-control quantity-input" data-price="<?php echo $food['food_item_price']; ?>">
+                                    <label>
+                                        <input type="number" placeholder="1" min="1" max="20" class="form-control quantity-input" data-price="<?php echo $food['food_item_price']; ?>">
+                                    </label>
                                 </div>
                                 <div class="p-2">
                                     <p class="card-text" id="card-text">Price: NRS<?php echo $food['food_item_price']; ?></p>

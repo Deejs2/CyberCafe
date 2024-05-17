@@ -5,6 +5,7 @@ session_start();
 use model\FoodCategory;
 use model\FoodItem;
 use model\User;
+use model\Promocode;
 
 if(!isset($_SESSION["email"])){
     header("Location: ../auth/auth.php?page=auth");
@@ -15,6 +16,7 @@ include "../database/DatabaseConnection.php";
 include "../model/FoodCategory.php";
 include "../model/FoodItem.php";
 include "../model/User.php";
+include "../model/Promocode.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
@@ -24,6 +26,7 @@ $category = new FoodCategory($connection);
 $product = new FoodItem($connection);
 $categories = $category->getAllCategories();
 $user = new User($connection);
+$promo = new Promocode($connection);
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +42,8 @@ $user = new User($connection);
     <link rel="stylesheet" href="../design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
 </head>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <body>
 <?php include "common/header.php"?>
@@ -85,6 +90,10 @@ $user = new User($connection);
 
             case "recent-activity":
                 include "recent-activity.php";
+                break;
+
+            case "promo-code":
+                include "promo-code.php";
                 break;
 
             case "food-categories":

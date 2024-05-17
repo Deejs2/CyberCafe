@@ -11,11 +11,11 @@
         </li><!-- End Dashboard Nav -->
 
 <!--        <li class="nav-item">-->
-<!--            <a class="nav-link" href="?page=analytics">-->
-<!--                <i class="fa-solid fa-magnifying-glass-chart fs-6"></i><span>Analytics</span>-->
+<!--            <a class="nav-link" href="?page=promo-code">-->
+<!--                <i class="fa-solid fa-magnifying-glass-chart fs-6"></i><span>Promocode</span>-->
 <!--            </a>-->
 <!--        </li>-->
-        <!-- End Customer Nav -->
+<!--         End Customer Nav -->
 
         <li class="nav-item">
             <a class="nav-link" href="?page=customer">
@@ -76,6 +76,11 @@
                 </li>
             </ul>
         </li><!-- End Users Nav -->
+        <li class="nav-item">
+            <a class="nav-link" href="?page=promo-code">
+                <i class="fa-solid fa-magnifying-glass-chart fs-6"></i><span>Promocode</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->
