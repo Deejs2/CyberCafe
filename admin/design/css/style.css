@@ -3,9 +3,20 @@
 # General
 --------------------------------------------------------------*/
 :root {
+    --bs-primary-rgb: 226, 144, 20;
+    --bs-bg-opacity: 0.8;
+    --bs-success-rgb: 62, 159, 51;
     scroll-behavior: smooth;
 }
-
+.primary{
+    color: var(--bs-primary-rgb) !important;
+}
+.bg-primary {
+    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
+.bg-success {
+    background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+}
 body {
     font-family: "Open Sans", sans-serif;
     background: #f6f9ff;

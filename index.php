@@ -1,4 +1,5 @@
 <?php
+global $connection;
 session_start();
 if(isset($_GET["table"])){
     $_SESSION["table"] = $_GET["table"];
@@ -14,11 +15,15 @@ $GLOBALS["menuLink"] = "?page=menu";
 
 use model\FoodCategory;
 use model\FoodItem;
+use model\Cart;
 
 include "model/FoodCategory.php";
 $category = new FoodCategory($connection);
 include "model/FoodItem.php";
 $foodItem = new FoodItem($connection);
+
+include "model/Cart.php";
+$cart = new Cart($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +34,7 @@ $foodItem = new FoodItem($connection);
     <link rel="stylesheet" href="design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
 <?php include "common/header.php"?>

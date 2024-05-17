@@ -118,4 +118,12 @@ class User
         $stmt->close();
     }
 
+    public function getAllApprovedUser()
+    {
+        $sql = "SELECT * FROM tbl_users WHERE request_status = 'Approved' ORDER BY created_at desc";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+
+    }
+
 }
