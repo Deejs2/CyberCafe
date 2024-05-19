@@ -1,7 +1,7 @@
 
   <div class="container mt-3">
     <div class="table-responsive">
-        <table class="table" style="border: 3px solid black;">
+        <table class="table table-striped align-middle">
             <thead>
                 <tr>
                     <th scope="col">S.No</th>
@@ -16,45 +16,38 @@
             </thead>
             <tbody>
               <?php
-              $foodItems = $foodItem->getAllFoodItems();
+              $foodItems = $product->getAllItems();
               ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
+                <?php if ($foodItems){
+                    foreach ($foodItems as $food){
+                    ?>
                   <tr>
-            <th scope="row"><?= $row['product_id']; ?></th>
-            <td><?= $row['product_name']; ?></td>
-            <td><?= $row['product_description']; ?></td>
+            <th scope="row"><?= $food['food_item_id']; ?></th>
+            <td><?= $food['food_item_name']; ?></td>
+            <td><?= $food['food_item_description']; ?></td>
 
-            <td><img class="product-image" src="<?= $row['product_image']; ?>" alt="Product Image"></td>
+            <td><img class="image-fluid" src="product/uploads/<?= $food['food_item_image']; ?>" height="50px" alt="Product Image"></td>
            
            
-            <td><?= $row['product_status']; ?></td>
-            <td><?= $row['product_price']; ?></td>
-            <td><?= $row['category_name']; ?></td>
+            <td><?= $food['food_item_status']; ?></td>
+            <td>NRS <?= $food['food_item_price']; ?></td>
             <td>
-                <a href="product-edit.php?id=<?= $row['product_id']; ?>"><i class="fas fa-edit fa-md"></i></a>&nbsp;&nbsp
-                <a href="#" onclick="confirmDeactivation(<?= $row['product_id']; ?>)"><i class="fas fa-trash fa-md" style="color: red;">
                 <?php
-if (isset($_GET['id'])) {
-   
-    $statement = $connection->prepare("UPDATE product SET product_status = false WHERE product_id = ?");
-    $statement->bind_param("i", $_GET['id']);
-    $statement->execute();
-}
-?>
+                $categories = $category->getCategoryById($food['food_category_id']);
+                echo $categories['food_category_name'];
+                ?>
+            </td>
+            <td>
+                <a href="?page=product&&action=edit&&productId=<?=$food['food_item_id']; ?>"><i class="fas fa-edit fa-md"></i></a>&nbsp;&nbsp
+                <a href="?page=product&&action=delete&&productId=<?=$food['food_item_id']; ?>"><i class="fas fa-trash fa-md" style="color: red;">
                 </i></a>
             </td>
         </tr>
-        <?php endwhile;
-    $connection->close(); ?>
+        <?php }}else{
+                    echo "<tr><td colspan='8' class='text-center'>No data found</td></tr>";
+                }?>
             </tbody>
         </table>
     </div>
 </div>
 
-<script>
-function confirmDeactivation(id) {
-    if (confirm('Are you sure you want to deactivate this product?')) {
-        window.location.href = 'productTable.php?id=' + id + '&confirm=true';
-    }
-}
-</script>

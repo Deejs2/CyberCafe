@@ -1,39 +1,60 @@
+<?php
+if(isset($_POST['submit'])){
+    $fullName = $_POST['fullName'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+
+    if(empty($fullName) || empty($email) || empty($phone) || empty($address)){
+        header("Location: ?page=checkout&&msg=error");
+    }else{
+        $msg = "Your order has been placed successfully!";
+    }
+    header("Location: payment/payment-request.php");
+}
+?>
+
 <div class="container p-5">
     <div class="row border p-4 shadow rounded-3">
         <div class="col-lg-8">
             <h3 class="fs-4">Billing Info</h3>
             <span>this is small text.</span>
 
-            <form class="row py-3 g-3">
+            <form method="post" class="row py-3 g-3">
                 <div class="col-md-4">
                     <label for="fullName" class="form-label">FullName <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="fullName">
-                    <span class="text-danger">Please enter a valid name!</span>
+                    <input type="text" class="form-control" id="fullName">
+                    <span class="text-danger"><?php if(isset($_GET['msg'])){echo "Please enter a valid name!";} ?></span>
                 </div>
                 <div class="col-md-4">
                     <label for="email" class="form-label">Email</label>
-                    <input type="password" class="form-control" id="email">
-                    <span class="text-danger">Please enter a valid email!</span>
+                    <input type="email" class="form-control" id="email">
+                    <span class="text-danger"><?php if(isset($_GET['msg'])){echo "Please enter a valid email!";} ?></span>
                 </div>
                 <div class="col-md-4">
                     <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" id="phone">
-                    <span class="text-danger">Please enter a valid phone!</span>
+                    <input type="text" class="form-control" id="phone">
+                    <span class="text-danger"><?php if(isset($_GET['msg'])){echo "Please enter a valid phone!";} ?></span>
                 </div>
                 <div class="col-12">
                     <label for="address" class="form-label">Address</label>
                     <input type="text" class="form-control" id="address" placeholder="Boudha, Kathmandu">
-                    <span class="text-danger">Please enter a valid address!</span>
                 </div>
                 <div class="col w-auto">
                     <h3 class="fs-4">Payment Method :</h3>
-                    <div class="border rounded-2 p-3 fs-2">
-                        <i class="fa-solid fa-money-bill-wave"></i>
-                        <span class="ms-2">Cash</span>
+                    <div class="d-flex g-2">
+                        <div class="border rounded-2 p-3 fs-2 me-2">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            <span class="ms-2">Cash</span>
+                        </div>
+                        <div class="border rounded-2 p-3 fs-2">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <span class="ms-2">Esewa</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Proceed</button>
+                    <button type="submit" name="submit" class="btn bg-primary text-white">Proceed</button>
                 </div>
             </form>
 

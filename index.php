@@ -1,4 +1,13 @@
 <?php
+global $connection;
+session_start();
+if(isset($_GET["table"])){
+    $_SESSION["table"] = $_GET["table"];
+}
+if(!isset($_SESSION["table"])){
+    header("Location: select-table.php");
+    exit();
+}
 include "database/DatabaseConnection.php";
 $page = $_GET["page"] ?? "menu";
 $action = $_GET["action"] ?? "";
@@ -6,11 +15,15 @@ $GLOBALS["menuLink"] = "?page=menu";
 
 use model\FoodCategory;
 use model\FoodItem;
+use model\Cart;
 
 include "model/FoodCategory.php";
 $category = new FoodCategory($connection);
 include "model/FoodItem.php";
 $foodItem = new FoodItem($connection);
+
+include "model/Cart.php";
+$cart = new Cart($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +33,8 @@ $foodItem = new FoodItem($connection);
     <title>CyberCafe | <?php echo ucfirst($page)?></title>
     <link rel="stylesheet" href="design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
-    <link rel="stylesheet" href="design/css/landing.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
 <?php include "common/header.php"?>
