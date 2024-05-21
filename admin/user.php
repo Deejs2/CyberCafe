@@ -1,3 +1,4 @@
+<?php global$user; ?>
 <div class="table-responsive">
     <table class="table shadow-sm p-3 mb-5 bg-body-tertiary rounded">
         <thead>
@@ -18,7 +19,7 @@
         foreach ($users as $user){
             echo "<tr>
         <td>$i</td>
-        <td><img src='../image/$user[profile_pic]'></td>
+        <td><img src='../image/$user[profile_pic]' alt=''></td>
         <td>$user[fullname]</td>
         <td>$user[email]</td>
         <td>$user[address]</td>

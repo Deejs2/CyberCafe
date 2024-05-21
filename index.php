@@ -1,4 +1,5 @@
 <?php
+ob_start();
 global $connection;
 session_start();
 if(isset($_GET["table"])){
@@ -13,9 +14,13 @@ $page = $_GET["page"] ?? "menu";
 $action = $_GET["action"] ?? "";
 $GLOBALS["menuLink"] = "?page=menu";
 
+use model\Checkout;
+use model\Customer;
 use model\FoodCategory;
 use model\FoodItem;
 use model\Cart;
+use model\Order;
+use model\Promocode;
 
 include "model/FoodCategory.php";
 $category = new FoodCategory($connection);
@@ -24,6 +29,18 @@ $foodItem = new FoodItem($connection);
 
 include "model/Cart.php";
 $cart = new Cart($connection);
+
+include "model/PromoCode.php";
+$promo = new PromoCode($connection);
+
+include "model/Order.php";
+$order = new Order($connection);
+
+include "model/Customer.php";
+$customer = new Customer($connection);
+
+include "model/Checkout.php";
+$checkout = new Checkout($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,19 +61,24 @@ switch($page){
     case "menu":
         if($action == "filter"){
             include "food-category-list.php";
-            break;
         } else {
             include "menu.php";
-            break;
         }
+        break;
 
     case "cart":
+        if($action == "edit"){
+            include "edit-cart.php";
+            break;
+        }
         include "cart.php";
         break;
 
     case "checkout":
         include "checkout.php";
         break;
+
+
 
     default:
         // Check if the requested page file exists

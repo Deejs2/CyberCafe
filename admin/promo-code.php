@@ -34,6 +34,35 @@ if(isset($_GET['id'])){
             title: 'Promo code deleted successfully!',
             showConfirmButton: false,
             timer: 1500
+        });
+        </script>";
+    }
+}
+
+//set promo code active
+if(isset($_GET['setActive'])){
+    $promoId = $_GET['setActive'];
+    if($promo->setPromoCodeActive($promoId)){
+        echo "<script>Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Promo code activated successfully!',
+            showConfirmButton: false,
+            timer: 1500
+        });</script>";
+    }
+}
+
+//set promo code inactive
+if(isset($_GET['setInActive'])){
+    $promoId = $_GET['setInActive'];
+    if($promo->setPromoCodeInactive($promoId)){
+        echo "<script>Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Promo code inactivated successfully!',
+            showConfirmButton: false,
+            timer: 1500
         });</script>";
     }
 }
@@ -79,7 +108,28 @@ if(isset($_GET['id'])){
             <td><?php echo $promoCode['promo_code_discount']; ?></td>
             <td><?php if($promoCode['promo_code_status']){echo "Active";}else{echo "InActive";} ?></td>
             <td>
-                <a href="?page=promo-code&&id=<?php echo $promoCode['promo_code_id']?>" class="btn btn-danger">Delete</a>
+                <?php if($promoCode['promo_code_status']){
+                    echo "<a href='?page=promo-code&&setInActive=$promoCode[promo_code_id]' class='btn btn-secondary'>InActive</a>";
+                }else{
+                    echo "<a href='?page=promo-code&&setActive=$promoCode[promo_code_id]' class='btn btn-success'>Active</a>";
+                }
+                ?>
+                <a href="javascript:void(0);" onclick="function confirmDelete(promoId) {
+                            Swal.fire({
+                            title: 'Are you sure?',
+                            text: 'You will not be able to recover this promo code!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, delete it!',
+                            cancelButtonText: 'No, keep it'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                            // User confirmed, redirect to the delete page
+                            window.location.href = '?page=promo-code&&id=' + promoId;
+                            }
+                            });
+                        }
+                        confirmDelete(<?php echo $promoCode['promo_code_id']?>)" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         <?php
@@ -88,3 +138,4 @@ if(isset($_GET['id'])){
     ?>
     </tbody>
 </table>
+
