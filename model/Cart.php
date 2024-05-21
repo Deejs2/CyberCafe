@@ -68,4 +68,15 @@ class Cart
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    //get cart by id
+    public function getCartById($cartId)
+    {
+        $sql = "SELECT * FROM tbl_carts WHERE cart_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $cartId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
 }
