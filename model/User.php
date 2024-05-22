@@ -14,21 +14,22 @@ class User
     {
         $fullName = $firstname . " " . $lastname;
         $request_status = "Pending";
+        $role = "Staff";
 
         // Save the user to the database
-        $sql = "INSERT INTO tbl_users (fullname, email, address, phone, request_status) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tbl_users (fullname, email, address, phone, request_status, role, status) VALUES (?, ?, ?, ?, ?, ?, true)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssss", $fullName, $email, $address, $contact_number, $request_status);
+        $stmt->bind_param("ssssss", $fullName, $email, $address, $contact_number, $request_status, $role);
         $stmt->execute();
         $stmt->close();
     }
 
-    function userRequestApproval($id, $hashed_password)
+    function userRequestApproval($user_id, $hashed_password)
     {
         // Update the user's status to approved
-        $sql = "UPDATE tbl_users SET request_status = 'Approved', status = true, password = $hashed_password, role = 'Staff' WHERE id = ?";
+        $sql = "UPDATE tbl_users SET request_status = 'Approved', password = ? WHERE user_id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("si", $hashed_password, $user_id);
         $stmt->execute();
         $stmt->close();
     }

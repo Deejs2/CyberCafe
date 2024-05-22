@@ -1,7 +1,19 @@
 
 <?php
 global$foodItem; global$cart; global$categories;
-include "common/menu-header.php"?>
+include "common/menu-header.php";
+
+if(isset($_SESSION['transaction_msg'])){
+    echo $_SESSION['transaction_msg'];
+    unset($_SESSION['transaction_msg']);
+}
+
+if(isset($_SESSION['customer_id']) && isset($_SESSION['table'])){
+    unset($_SESSION['customer_id']);
+    unset($_SESSION['table']);
+}
+
+?>
 
 <?php
 if(isset($_POST['order']) && isset($_SESSION['table'])){

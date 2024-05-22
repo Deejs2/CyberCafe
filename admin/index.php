@@ -1,9 +1,12 @@
 <?php
+global $connection;
 ob_start(); // Start output buffering
 session_start();
 
+use model\Customer;
 use model\FoodCategory;
 use model\FoodItem;
+use model\Order;
 use model\User;
 use model\Promocode;
 
@@ -17,6 +20,9 @@ include "../model/FoodCategory.php";
 include "../model/FoodItem.php";
 include "../model/User.php";
 include "../model/Promocode.php";
+include "../model/Order.php";
+include "../model/Customer.php";
+include "../mail-config.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
@@ -27,6 +33,8 @@ $product = new FoodItem($connection);
 $categories = $category->getAllCategories();
 $user = new User($connection);
 $promo = new Promocode($connection);
+$order = new Order($connection);
+$customer = new Customer($connection);
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +52,7 @@ $promo = new Promocode($connection);
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 <?php include "common/header.php"?>
 

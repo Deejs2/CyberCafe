@@ -89,4 +89,10 @@ class FoodItem
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+    public function countItems()
+    {
+        $sql = "SELECT COUNT(*) as total FROM tbl_food_items";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
+    }
 }
