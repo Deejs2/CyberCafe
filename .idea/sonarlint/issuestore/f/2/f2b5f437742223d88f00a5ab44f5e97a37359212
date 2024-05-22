@@ -1,0 +1,59 @@
+
+`php:S103€"KSplit this 121 characters long line (which is greater than 120 authorized).(ÇŞåÖ
+3php:S113"'Add a new line at the end of this file.
+;	php:S2003"&Replace "include" with "include_once".(šÓ÷æ
+:	php:S2003"&Replace "include" with "include_once".(½í§'
+;	php:S2003"&Replace "include" with "include_once".(Ğ­‘÷
+;	php:S2003"&Replace "include" with "include_once".(ƒ†ıˆ
+;	php:S2003"&Replace "include" with "include_once".(Û˜­•
+@	php:S20031"&Replace "include" with "include_once".(´Ã«ˆÿÿÿÿÿ
+@	php:S20033"&Replace "include" with "include_once".(˜Èä¸øÿÿÿÿ
+;	php:S20036"&Replace "include" with "include_once".(Ëİ®ã
+;	php:S2003;"&Replace "include" with "include_once".(‹–Ì
+;	php:S2003?"&Replace "include" with "include_once".(û¸„Š
+@	php:S2003D"&Replace "include" with "include_once".(õÉ”ÿÿÿÿÿ
+;	php:S2003F"&Replace "include" with "include_once".(Õäòù
+;	php:S2003K"&Replace "include" with "include_once".(êĞ¼¹
+@	php:S2003P"&Replace "include" with "include_once".(÷š‚ÿÿÿÿÿ
+;	php:S2003R"&Replace "include" with "include_once".(üéû
+@	php:S2003T"&Replace "include" with "include_once".(î‘â–øÿÿÿÿ
+@	php:S2003W"&Replace "include" with "include_once".(í÷Ç¼ùÿÿÿÿ
+@	php:S2003\"&Replace "include" with "include_once".(ÓèÇşÿÿÿÿ
+;	php:S2003`"&Replace "include" with "include_once".(«»çâ
+;	php:S2003e"&Replace "include" with "include_once".(êÈáñ
+@	php:S2003g"&Replace "include" with "include_once".(õœøÔûÿÿÿÿ
+;	php:S2003i"&Replace "include" with "include_once".(Ä¼
+@	php:S2003l"&Replace "include" with "include_once".(®¢“¬şÿÿÿÿ
+;	php:S2003t"&Replace "include" with "include_once".(ˆ¯Ôº
+;	php:S2003w"&Replace "include" with "include_once".(à†íñ
+@	php:S2003~"&Replace "include" with "include_once".(õŒ¤‘üÿÿÿÿ
+Q	php:S1793Q"<Replace this "else if" keyword sequence by "elseif" keyword.(‹’Œ
+V	php:S1793S"<Replace this "else if" keyword sequence by "elseif" keyword.(ÿ¶ëŒøÿÿÿÿ
+Q	php:S1793f"<Replace this "else if" keyword sequence by "elseif" keyword.(‹’Œ
+V	php:S1793h"<Replace this "else if" keyword sequence by "elseif" keyword.(ÿ¶ëŒøÿÿÿÿ
+a	php:S4833"LReplace "include" with namespace import mechanism through the "use" keyword.(šÓ÷æ
+`	php:S4833"LReplace "include" with namespace import mechanism through the "use" keyword.(½í§'
+a	php:S4833"LReplace "include" with namespace import mechanism through the "use" keyword.(Ğ­‘÷
+a	php:S4833"LReplace "include" with namespace import mechanism through the "use" keyword.(ƒ†ıˆ
+a	php:S4833"LReplace "include" with namespace import mechanism through the "use" keyword.(Û˜­•
+f	php:S48331"LReplace "include" with namespace import mechanism through the "use" keyword.(´Ã«ˆÿÿÿÿÿ
+f	php:S48333"LReplace "include" with namespace import mechanism through the "use" keyword.(˜Èä¸øÿÿÿÿ
+a	php:S48336"LReplace "include" with namespace import mechanism through the "use" keyword.(Ëİ®ã
+a	php:S4833;"LReplace "include" with namespace import mechanism through the "use" keyword.(‹–Ì
+a	php:S4833?"LReplace "include" with namespace import mechanism through the "use" keyword.(û¸„Š
+f	php:S4833D"LReplace "include" with namespace import mechanism through the "use" keyword.(õÉ”ÿÿÿÿÿ
+a	php:S4833F"LReplace "include" with namespace import mechanism through the "use" keyword.(Õäòù
+a	php:S4833K"LReplace "include" with namespace import mechanism through the "use" keyword.(êĞ¼¹
+f	php:S4833P"LReplace "include" with namespace import mechanism through the "use" keyword.(÷š‚ÿÿÿÿÿ
+a	php:S4833R"LReplace "include" with namespace import mechanism through the "use" keyword.(üéû
+f	php:S4833T"LReplace "include" with namespace import mechanism through the "use" keyword.(î‘â–øÿÿÿÿ
+f	php:S4833W"LReplace "include" with namespace import mechanism through the "use" keyword.(í÷Ç¼ùÿÿÿÿ
+f	php:S4833\"LReplace "include" with namespace import mechanism through the "use" keyword.(ÓèÇşÿÿÿÿ
+a	php:S4833`"LReplace "include" with namespace import mechanism through the "use" keyword.(«»çâ
+a	php:S4833e"LReplace "include" with namespace import mechanism through the "use" keyword.(êÈáñ
+f	php:S4833g"LReplace "include" with namespace import mechanism through the "use" keyword.(õœøÔûÿÿÿÿ
+a	php:S4833i"LReplace "include" with namespace import mechanism through the "use" keyword.(Ä¼
+f	php:S4833l"LReplace "include" with namespace import mechanism through the "use" keyword.(®¢“¬şÿÿÿÿ
+a	php:S4833t"LReplace "include" with namespace import mechanism through the "use" keyword.(ˆ¯Ôº
+a	php:S4833w"LReplace "include" with namespace import mechanism through the "use" keyword.(à†íñ
+f	php:S4833~"LReplace "include" with namespace import mechanism through the "use" keyword.(õŒ¤‘üÿÿÿÿ

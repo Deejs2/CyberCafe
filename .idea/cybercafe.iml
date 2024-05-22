@@ -13,4 +13,7 @@
     <orderEntry type="library" name="cbeb993ef9" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="6765345d-4823-4b11-9dea-fc1b8b707c1a" />
+  </component>
 </module>
