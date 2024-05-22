@@ -1,0 +1,14 @@
+
+NWeb:AvoidCommentedOutCodeCheckS"Remove this commented out code.(ŽÞí¿ÿÿÿÿÿ
+_php:S103"KSplit this 214 characters long line (which is greater than 120 authorized).(ª™Õ
+dphp:S103"KSplit this 129 characters long line (which is greater than 120 authorized).(äŒ—Ìøÿÿÿÿ
+_php:S103!"KSplit this 138 characters long line (which is greater than 120 authorized).(³ÊìÁ
+_php:S103/"KSplit this 157 characters long line (which is greater than 120 authorized).(ÈŠÿ
+_php:S1036"KSplit this 129 characters long line (which is greater than 120 authorized).(¡÷¼Ô
+_php:S103="KSplit this 148 characters long line (which is greater than 120 authorized).(ùøÒ±
+dphp:S103z"KSplit this 181 characters long line (which is greater than 120 authorized).(Úïƒßùÿÿÿÿ
+dphp:S103{"KSplit this 123 characters long line (which is greater than 120 authorized).(ûŸèªþÿÿÿÿ
+8	php:S1780…"Remove this closing tag "?>".(Ö‘äÏúÿÿÿÿ
+3php:S113"'Add a new line at the end of this file.
+;	php:S2003j"&Replace "include" with "include_once".(ú”¹ù
+a	php:S4833j"LReplace "include" with namespace import mechanism through the "use" keyword.(ú”¹ù

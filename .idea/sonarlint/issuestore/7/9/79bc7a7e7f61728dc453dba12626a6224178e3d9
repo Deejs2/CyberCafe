@@ -1,0 +1,17 @@
+
+NWeb:AvoidCommentedOutCodeCheck"Remove this commented out code.(½¹¤øÿÿÿÿ
+NWeb:AvoidCommentedOutCodeCheck*"Remove this commented out code.(ú×Íµşÿÿÿÿ
+OWeb:AvoidCommentedOutCodeCheckÖ"Remove this commented out code.(§æÍ³şÿÿÿÿ
+Z	php:S1131M"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+Z	php:S1131["@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+Z	php:S1131i"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+Z	php:S1131w"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+[	php:S1131ˆ"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+[	php:S1131–"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+[	php:S1131¤"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+[	php:S1131²"@Remove the useless trailing whitespaces at the end of this line.(®’Öÿÿÿÿÿ
+_php:S103"KSplit this 214 characters long line (which is greater than 120 authorized).(ª™Õ
+dphp:S103"KSplit this 173 characters long line (which is greater than 120 authorized).(½¹¤øÿÿÿÿ
+dphp:S103*"KSplit this 157 characters long line (which is greater than 120 authorized).(ú×Íµşÿÿÿÿ
+ephp:S103º"KSplit this 208 characters long line (which is greater than 120 authorized).(ò·ù¿ÿÿÿÿÿ
+3php:S113"'Add a new line at the end of this file.

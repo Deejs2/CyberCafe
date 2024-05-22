@@ -10,8 +10,19 @@ if(isset($_POST['submit'])){
     }else{
         $msg = "Your order has been placed successfully!";
     }
-    header("Location: payment/payment-request.php");
+    $paymentMethod = $_POST['paymentMethod'];
+
+    if ($paymentMethod == 'cash') {
+        header("Location: payment/cash-response.php");
+    } else if ($paymentMethod == 'esewa') {
+        header("Location: payment/payment-request.php");
+    } else {
+        echo "Please select the payment Method";
+    }
+
+    exit;
 }
+
 ?>
 
 <div class="container p-5">
@@ -42,16 +53,26 @@ if(isset($_POST['submit'])){
                 </div>
                 <div class="col w-auto">
                     <h3 class="fs-4">Payment Method :</h3>
-                    <div class="d-flex g-2">
-                        <div class="border rounded-2 p-3 fs-2 me-2">
+                    <!-- <div class="d-flex g-2">
+                        <div class="border rounded-2 p-3 fs-2 me-2 payment-option">
                             <i class="fa-solid fa-money-bill-wave"></i>
                             <span class="ms-2">Cash</span>
                         </div>
-                        <div class="border rounded-2 p-3 fs-2">
+                        <div class="border rounded-2 p-3 fs-2 payment-option">
                             <i class="fa-solid fa-money-bill"></i>
                             <span class="ms-2">Esewa</span>
                         </div>
-                    </div>
+                    </div> -->
+                    <div class="d-flex g-2">
+    <div class="border rounded-2 p-3 fs-2 me-2">
+        <input type="radio" id="cash" name="paymentMethod" value="cash">
+        <label for="cash"><i class="fa-solid fa-money-bill-wave"></i><span class="ms-2">Cash</span></label>
+    </div>
+    <div class="border rounded-2 p-3 fs-2">
+        <input type="radio" id="esewa" name="paymentMethod" value="esewa">
+        <label for="esewa"><i class="fa-solid fa-money-bill"></i><span class="ms-2">Esewa</span></label>
+    </div>
+</div>
                 </div>
                 <div class="col-12">
                     <button type="submit" name="submit" class="btn bg-primary text-white">Proceed</button>
