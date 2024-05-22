@@ -149,9 +149,9 @@ if(isset($_POST['checkout'])){
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Discount</div>
-                            Spent above NRS. 1000 and get 5% discount
+                            Spent above NRS. 800 and get 2% discount
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">NRS. <?php if($cart->sumTotal($_SESSION['table'])['total']>1000){echo $cart->sumTotal($_SESSION['table'])['total']*0.05;}else{echo 0;} ?></span>
+                        <span class="badge text-bg-primary rounded-pill">NRS. <?php if($cart->sumTotal($_SESSION['table'])['total']>800){echo $cart->sumTotal($_SESSION['table'])['total']*0.02;}else{echo 0;} ?></span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
@@ -182,8 +182,8 @@ if(isset($_POST['checkout'])){
                         <span>NRS.
                             <?php
                                 $grandTotal = $cart->sumTotal($_SESSION['table'])['total'];
-                                if($cart->sumTotal($_SESSION['table'])['total']>1000) {
-                                    $grandTotal -= $cart->sumTotal($_SESSION['table'])['total'] * 0.05;
+                                if($cart->sumTotal($_SESSION['table'])['total']>800) {
+                                    $grandTotal -= $cart->sumTotal($_SESSION['table'])['total'] * 0.02;
                                 }
                                 if(isset($_POST['apply-promo-code'])){
                                 $promoCode = $_POST['promoCode'];

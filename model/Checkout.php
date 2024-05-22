@@ -34,7 +34,7 @@ class Checkout
     {
         $sql = "SELECT * FROM tbl_checkout WHERE customer_id = '$customer_id'";
         $result = $this->connection->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $result->fetch_assoc();
     }
 
     //set payment status to completed

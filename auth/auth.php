@@ -49,6 +49,8 @@ if (isset($_POST["send-otp"])) {
 
         // Send OTP
         echo sendOtpMail($email, $subject, $message);
+        header("Location: ?page=auth&&action=otp-confirmation");
+        exit();
 
     } else {
         // User doesn't exist

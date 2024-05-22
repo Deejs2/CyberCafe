@@ -22,6 +22,7 @@ include "../model/User.php";
 include "../model/Promocode.php";
 include "../model/Order.php";
 include "../model/Customer.php";
+include "../mail-config.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";

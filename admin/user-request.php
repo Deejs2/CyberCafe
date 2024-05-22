@@ -1,19 +1,57 @@
 <?php
+global $user;
 if($_GET['action'] == 'approve'&& isset($_GET['id'])){
     $id = $_GET['id'];
     $user->approveUser($id);
+    $userDetail = $user->getUserById($id);
+    //error : Unsupported operand types
+
+    $hashed_password = password_hash($userDetail['fullname'].$userDetail['user_id'], PASSWORD_DEFAULT);
+    $user->userRequestApproval($id, $hashed_password);
+    userRequestMail(
+            $userDetail['email'],
+            "Request Approved",
+            "
+            Your request has been approved by the admin. You can now login to the system.
+            Login Credentials:
+            Email: ".$userDetail['email']."
+            Password: ".$userDetail['fullname'].$userDetail['user_id']."
+            "
+    );
     header("Location: ?page=user&&action=user-request");
 }
 
 if($_GET['action'] == 'reject'&& isset($_GET['id'])) {
     $id = $_GET['id'];
+    $userDetail = $user->getUserById($id);
     $user->rejectUser($id);
+    userRequestMail(
+        $userDetail['email'],
+        "Request Rejected",
+        "
+            Your request has been rejected by the admin. Please contact the admin for more information.
+            contact info:
+            Email: cybercafe@gmail.com
+            Phone: 1234567890
+            "
+    );
     header("Location: ?page=user&&action=user-request");
 }
 
 if($_GET['action'] == 'remove'&& isset($_GET['id'])) {
     $id = $_GET['id'];
+    $userDetail = $user->getUserById($id);
     $user->removeUser($id);
+    userRequestMail(
+        $userDetail['email'],
+        "Request Rejected",
+        "
+            You have been removed from the system. Please contact the admin for more information.
+            contact info:
+            Email: cybercafe@gmail.com
+            Phone: 1234567890
+            "
+    );
     header("Location: ?page=user&&action=user-request");
 }
 ?>

@@ -81,16 +81,6 @@ class Customer
         return $result->fetch_assoc();
     }
 
-    public function getCustomerId($phone)
-    {
-        $sql = "SELECT customer_id FROM tbl_customers WHERE customer_phone = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s", $phone);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
-    }
-
     //get customer info from customer_id
     public function getCustomerInfo($customer_id)
     {
@@ -99,6 +89,14 @@ class Customer
         $stmt->bind_param("i", $customer_id);
         $stmt->execute();
         $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    //get latest inserted customer
+    public function getLatestCustomer()
+    {
+        $sql = "SELECT * FROM tbl_customers order by customer_id desc limit 1";
+        $result = $this->conn->query($sql);
         return $result->fetch_assoc();
     }
 
