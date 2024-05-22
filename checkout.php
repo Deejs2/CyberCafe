@@ -22,7 +22,7 @@ if(isset($_POST['checkout'])){
         header("Location: ?page=checkout&&msg=error");
     }else{
         $customer->addCustomer($fullName, $email, $phone, $address);
-        $_SESSION['customer_id'] = $customer->getCustomerId($phone)['customer_id'];
+        $_SESSION['customer_id'] = $customer->getLatestCustomer()['customer_id'];
         $orders = $order->getOrdersByTable($_SESSION['table']);
         if ($orders && array_key_exists('order_code', $orders)) {
             $checkout->saveCheckout($orders['order_code'], $paymentMethod);

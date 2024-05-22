@@ -2,12 +2,26 @@
 session_start();
 global $checkout, $connection;
 
+use model\Cart;
 use model\Checkout;
+use model\Customer;
+use model\Order;
 
 include "../../database/DatabaseConnection.php";
 include "../../model/Checkout.php";
+include "../../mail-config.php";
+include "../../model/Customer.php";
+include "../../model/Order.php";
+include "../../model/Cart.php";
 
 $checkout = new Checkout($connection);
+$customerData = new Customer($connection);
+$order = new Order($connection);
+$cart = new Cart($connection);
+
+$checkoutData = $checkout->getCheckoutInfo($_SESSION["customer_id"]);
+$orderData = $order->getOrdersByTable($_SESSION["table"]);
+$customerDetails = $customerData->getCustomerInfo($_SESSION["customer_id"]);
 // Get the pidx from the callback URL
 $pidx = $_GET['pidx'] ?? null;
 
@@ -44,6 +58,23 @@ if ($pidx) {
                 // Send a confirmation email to the customer
                 // Redirect to a success page
                 $checkout->setPaymentStatus($_SESSION["customer_id"]);
+                $cart->emptyCart($_SESSION["table"]);
+                sendPaymentDetailMail(
+                    $customerDetails['customer_email'],
+                    "Payment Confirmation",
+                    "
+                    Dear ". $customerDetails['customer_name'] ."
+                    Your payment was successful. Thank you for choosing us.
+                    Order Details:
+                    Order Code : " . $checkoutData['order_code'] . "
+                    Payment Method : ". $checkoutData['payment_method'] ."
+                    Grand Total : ".$orderData['grand_total']."
+                    
+                    Thank you for choosing us.
+                    Regards,
+                    CyberCafe Team
+                    "
+                );
                 $_SESSION['transaction_msg'] = '<script>
                         Swal.fire({
                             icon: "success",
@@ -52,6 +83,8 @@ if ($pidx) {
                             timer: 1500
                         });
                     </script>';
+
+
                 header("Location: ../../?page=menu");
                 exit();
                 // Replace with your actual business logic
@@ -63,6 +96,22 @@ if ($pidx) {
                 // Send an email to the customer about the failed transaction
                 // Redirect to a failure page
                 $checkout->setPaymentFailed($_SESSION["customer_id"]);
+                sendPaymentDetailMail(
+                    $customerDetails['customer_email'],
+                    "Payment Failed",
+                    "
+                        Dear ". $customerDetails['customer_name'] ."
+                        Your payment for the order was failed. Please try again.
+                        Order Details:
+                        Order Code : " . $checkoutData['order_code'] . "
+                        Payment Method : ". $checkoutData['payment_method'] ."
+                        Grand Total : ".$orderData['grand_total']."
+                        
+                        Thank you for choosing us.
+                        Regards,
+                        CyberCafe Team
+                        "
+                );
                 $_SESSION['transaction_msg'] = '<script>
                         Swal.fire({
                             icon: "error",
