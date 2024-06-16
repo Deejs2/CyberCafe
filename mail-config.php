@@ -23,7 +23,10 @@ function sendRegistrationMail($to, $subject, $message): string
 
 function sendOtpMail($to, $subject, $message): string
 {
-    $headers = "From: jireldhiraj123@gmail.com\r\nReply-To: $to";
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: jireldhiraj123@gmail.com\r\nReply-To: $to";
+
     $mail_sent = mail($to, $subject, $message, $headers);
     if ($mail_sent) {
         return "Otp sent to $to.";
