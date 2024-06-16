@@ -3,8 +3,8 @@
 
 <div class="container-fluid d-flex justify-content-center">
 
-    <form id="login" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=auth" method="post">
-        <h2 class="bg-primary p-2 text-white text-center">CyberCafe</h2>
+    <form id="login" class="mt-5" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=auth" method="post">
+        <h2 class="bg-primary mt-2 p-2 text-white text-center">CyberCafe</h2>
         <div class="mt-5">
             <label for="formGroupExampleInput" class="form-label">Email</label>
             <input type="text" name="email" class="form-control" id="formGroupExampleInput">
@@ -29,7 +29,9 @@
 
 </div>
 
-<?php include "../common/footer.php" ?>
+<div class="mt-5">
+    <?php include "../common/footer.php" ?>
+</div>
 
 <!-- JavaScript to toggle password visibility -->
 <script>

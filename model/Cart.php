@@ -89,4 +89,15 @@ class Cart
         return $stmt->execute();
     }
 
+    //count cart items from table number
+    public function countCartItems($tableNumber)
+    {
+        $sql = "SELECT COUNT(cart_id) as total FROM tbl_carts WHERE table_number = ? AND cart_status = true";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $tableNumber);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
 }

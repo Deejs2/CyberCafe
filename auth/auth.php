@@ -1,11 +1,17 @@
 <?php
 
+global $connection;
+
+use model\Cart;
 use model\User;
 
 session_start();
 require "../database/DatabaseConnection.php";
 include "../model/User.php";
 include "../mail-config.php";
+
+include "../model/Cart.php";
+$cart = new Cart($connection);
 
 $page = $_GET["page"] ?? "";
 $action = $_GET["action"] ?? "Login";
@@ -75,6 +81,8 @@ if (isset($_POST["register"])) {
         $subject = "CyberCafe | Registration Complete";
         $message = "You have successfully registered with CyberCafe. Please wait for the approval.";
         echo sendRegistrationMail($email, $subject, $message);
+        header("Location: ?page=auth&&action=login");
+        exit();
     }
 }
 ?>
@@ -89,17 +97,16 @@ if (isset($_POST["register"])) {
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../design/css/style.css">
     <style>
-        /* This footer design is for forgot-password and otp-confirmation */
-        .footer{
-            position: absolute;
-            bottom: 0;
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
         }
     </style>
 </head>
 <body>
-
-<?php include "common/header.php"?>
-
+<div class="fixed-top bg-primary">
+    <?php include "common/header.php"?>
+</div>
 <?php
 switch ($page){
     case "auth":

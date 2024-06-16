@@ -2,7 +2,7 @@
 
 <div class="container-fluid d-flex justify-content-center">
 
-    <form id="signup" action="" method="post">
+    <form id="signup" method="post">
         <h2 class="bg-primary p-2 text-white text-center">CyberCafe</h2>
         <div class="row g-3 my-2">
             <div class="col-md-6">

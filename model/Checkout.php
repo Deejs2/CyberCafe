@@ -17,9 +17,9 @@ class Checkout
         $table_number = $_SESSION["table"];
         $order_code = $orderCode;
         $payment_method = $paymentMethod;
-        $status = "Pending";
+        $status = "Not Paid";
 
-        $sql = "INSERT INTO tbl_checkout (customer_id, table_number, order_code, payment_method, payment_status) VALUES ('$customer_id', '$table_number', '$order_code', '$payment_method', '$status')";
+        $sql = "INSERT INTO tbl_checkout (customer_id, table_number, order_code, payment_method, payment_status, payment_date) VALUES ('$customer_id', '$table_number', '$order_code', '$payment_method', '$status', now())";
         $result = $this->connection->query($sql);
 
         if ($result) {
