@@ -1,5 +1,5 @@
 <?php
-global $connection;
+global $connection, $order;
 ob_start(); // Start output buffering
 session_start();
 
@@ -7,6 +7,7 @@ use model\Customer;
 use model\FoodCategory;
 use model\FoodItem;
 use model\Order;
+use model\Payment;
 use model\User;
 use model\Promocode;
 
@@ -23,6 +24,7 @@ include "../model/Promocode.php";
 include "../model/Order.php";
 include "../model/Customer.php";
 include "../mail-config.php";
+include "../model/Payment.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
@@ -35,6 +37,7 @@ $user = new User($connection);
 $promo = new Promocode($connection);
 $order = new Order($connection);
 $customer = new Customer($connection);
+$payment = new Payment($connection);
 ?>
 
 <!DOCTYPE html>
@@ -71,6 +74,10 @@ $customer = new Customer($connection);
                 include "customer.php";
                 break;
 
+            case "payment":
+                include "payment.php";
+                break;
+
             case "user":
                 if($action == "user-request"){
                     include "user-request.php";
@@ -97,7 +104,7 @@ $customer = new Customer($connection);
                 break;
 
             case "recent-activity":
-                include "recent-activity.php";
+                include "recent-payment.php";
                 break;
 
             case "promo-code":

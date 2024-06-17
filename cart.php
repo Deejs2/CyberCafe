@@ -204,7 +204,7 @@ if(isset($_POST['checkout'])){
             </div>
         </div>
         <div class="button-group text-end mt-3">
-            <button name="checkout" class="btn bg-success text-white" type="submit">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
+            <button name="checkout" class="btn bg-primary text-white" type="submit">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </form>
 </div>

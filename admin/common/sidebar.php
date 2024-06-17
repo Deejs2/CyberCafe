@@ -18,12 +18,6 @@
 <!--         End Customer Nav -->
 
         <li class="nav-item">
-            <a class="nav-link" href="?page=customer">
-                <i class="fa-solid fa-people-group"></i><span>Customer</span>
-            </a>
-        </li><!-- End Customer Nav -->
-
-        <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                 <i class="fa-brands fa-product-hunt"></i>Product<i class="fa-solid fa-caret-down ms-auto"></i>
             </a>
@@ -76,11 +70,24 @@
                 </li>
             </ul>
         </li><!-- End Users Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link" href="?page=payment">
+                <i class="fa-solid fa-money-check-dollar"></i><span>Payment</span>
+            </a>
+        </li><!-- End Payment Nav -->
+
         <li class="nav-item">
             <a class="nav-link" href="?page=promo-code">
                 <i class="fa-solid fa-magnifying-glass-chart fs-6"></i><span>Promocode</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="?page=customer">
+                <i class="fa-solid fa-people-group"></i><span>Customer</span>
+            </a>
+        </li><!-- End Customer Nav -->
     </ul>
 
 </aside><!-- End Sidebar-->

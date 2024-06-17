@@ -77,11 +77,44 @@ class Order
         return $result->fetch_assoc();
 
     }
+    //sum all orders of this month
+    public function sumOrdersThisMonth()
+    {
+        $sql = "SELECT SUM(grand_total) as total FROM tbl_orders WHERE MONTH(order_date) = MONTH(CURRENT_DATE())";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
+    }
     public function countOrders()
     {
         $sql = "SELECT SUM(grand_total) as total FROM tbl_orders";
         $result = $this->conn->query($sql);
         return $result->fetch_assoc();
+    }
+
+   // Function to update the status of an order
+    public function updateOrderStatus($orderId, $status): bool
+    {
+        // Prepare the SQL statement
+        $sql = "UPDATE tbl_orders SET order_status = ? WHERE order_id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind the parameters
+        $stmt->bind_param("si", $status, $orderId);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            return true; // Update successful
+        } else {
+            return false; // Update failed
+        }
+    }
+
+    // Function to show top 7 orders
+    public function getTopOrders()
+    {
+        $sql = "SELECT * FROM tbl_orders order by order_id desc limit 7";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
 }

@@ -50,11 +50,19 @@ $checkout = new Checkout($connection);
     <title>CyberCafe | <?php echo ucfirst($page)?></title>
     <link rel="stylesheet" href="design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+    </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
-<?php include "common/header.php"?>
+<div class="fixed-top bg-primary">
+    <?php include "common/header.php"?>
+</div>
 
 <?php
 switch($page){
