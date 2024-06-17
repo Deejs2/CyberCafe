@@ -3,12 +3,13 @@
 
 <div class="container-fluid d-flex justify-content-center">
 
-    <form id="login" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=auth" method="post">
-        <h2 class="bg-primary p-2 text-white text-center">CyberCafe</h2>
+    <form id="login" class="mt-5" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=auth" method="post">
+        <?php if(isset($error)){echo "<div class='alert alert-danger'>$error</div>";}else{echo '';} ?>
+        <h2 class="bg-primary mt-2 p-2 text-white text-center">CyberCafe</h2>
         <div class="mt-5">
             <label for="formGroupExampleInput" class="form-label">Email</label>
             <input type="text" name="email" class="form-control" id="formGroupExampleInput">
-            <span class="text-danger"><?php if(isset($error)){echo "Please enter a valid email!";} ?></span>
+            <span class="text-danger"><?= (isset($emailErr))? $emailErr : ''; ?></span>
         </div>
         <div class="mt-4">
             <label for="formGroupExampleInput" class="form-label">Password</label>
@@ -18,7 +19,7 @@
                     <i class="fa-regular fa-eye"></i>
                 </button>
             </div>
-            <span class="text-danger"><?php if(isset($error)){echo "Please enter a valid password!";} ?></span>
+            <span class="text-danger"><?= (isset($passwordErr))? $passwordErr : ''; ?></span>
         </div>
         <div class="d-flex justify-content-between mt-2">
             <p class="text-start"><a class="" href="?page=auth&&action=register">Request for an account?</a></p>
@@ -29,7 +30,9 @@
 
 </div>
 
-<?php include "../common/footer.php" ?>
+<div class="mt-5">
+    <?php include "../common/footer.php" ?>
+</div>
 
 <!-- JavaScript to toggle password visibility -->
 <script>

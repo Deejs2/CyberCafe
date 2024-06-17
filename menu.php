@@ -8,11 +8,6 @@ if(isset($_SESSION['transaction_msg'])){
     unset($_SESSION['transaction_msg']);
 }
 
-if(isset($_SESSION['customer_id']) && isset($_SESSION['table'])){
-    unset($_SESSION['customer_id']);
-    unset($_SESSION['table']);
-}
-
 ?>
 
 <?php
@@ -28,6 +23,8 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
             text: 'Item added to cart successfully',
             icon: 'success'
         });</script>";
+        header("Refresh:3");
+        exit();
     } else {
         echo "<script>Swal.fire({
             title: 'Error!',
@@ -52,7 +49,7 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
                     ?>
                     <div class="col">
                         <form method="post" class="card h-100">
-                            <img src="admin/product/uploads/<?php echo $food['food_item_image']?>" class="card-img-top" alt="...">
+                            <img src="admin/product/uploads/<?php echo $food['food_item_image']?>" class="card-img-top h-50" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title"><b><?php echo $food['food_item_name']; ?></b></h5>
                                 <p class="card-text"><?php echo $food['food_item_description']; ?></p>
@@ -67,7 +64,7 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
                                     <p class="card-text" id="card-text">Price: NRS<?php echo $food['food_item_price']; ?></p>
                                 </div>
                                 <div class="mt-2 d-grid gap-2 d-md">
-                                    <button type="submit" name="order" class="btn bg-primary text-white order">Order</button>
+                                    <button type="submit" name="order" class="btn bg-primary text-white order">Add To Cart</button>
                                 </div>
                             </div>
                         </form>

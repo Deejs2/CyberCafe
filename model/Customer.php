@@ -15,7 +15,7 @@ class Customer
     public function addCustomer($customerName, $customerEmail, $customerPhone, $customerAddress): bool
     {
         // Prepare the SQL statement
-        $sql = "INSERT INTO tbl_customers (customer_name, customer_email, customer_phone, customer_address) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO tbl_customers (customer_name, customer_email, customer_phone, customer_address, visit_date) VALUES (?, ?, ?, ?, now())";
         $stmt = $this->conn->prepare($sql);
 
         // Bind the parameters
@@ -73,7 +73,13 @@ class Customer
         }
     }
 
-    // Function to count the number of customers
+    // Function to count the number of customers this month
+    public function countCustomersThisMonth()
+    {
+        $sql = "SELECT COUNT(customer_id) as total FROM tbl_customers WHERE MONTH(visit_date) = MONTH(CURRENT_DATE()) AND YEAR(visit_date) = YEAR(CURRENT_DATE())";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
+    }
     public function countCustomers()
     {
         $sql = "SELECT COUNT(customer_id) as total FROM tbl_customers";

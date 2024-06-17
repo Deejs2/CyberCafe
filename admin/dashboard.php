@@ -1,4 +1,5 @@
-<?php global$product, $order, $customer; ?>
+<?php global$product, $order, $customer;
+?>
 <section class="section dashboard">
     <div class="row">
 
@@ -6,7 +7,7 @@
         <div class="col-lg-8">
             <div class="row">
 
-                <!-- Sales Card -->
+                <!-- Product Card -->
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
@@ -29,9 +30,9 @@
                         </div>
 
                     </div>
-                </div><!-- End Sales Card -->
+                </div><!-- End Product Card -->
 
-                <!-- Revenue Card -->
+                <!-- Order Card -->
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card revenue-card">
 
@@ -45,7 +46,7 @@
                                 <div class="ps-3">
                                     <h6>NRS.
                                         <?php
-                                        $orders = $order->countOrders();
+                                        $orders = $order->sumOrdersThisMonth();
                                         echo $orders['total'];
                                         ?>
                                     </h6>
@@ -54,7 +55,7 @@
                         </div>
 
                     </div>
-                </div><!-- End Revenue Card -->
+                </div><!-- End Order Card -->
 
                 <!-- Customers Card -->
                 <div class="col-xxl-4 col-xl-12">
@@ -62,7 +63,7 @@
                     <div class="card info-card customers-card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Customers <span>| This Year</span></h5>
+                            <h5 class="card-title">Customers <span>| This Month</span></h5>
 
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -71,7 +72,7 @@
                                 <div class="ps-3">
                                     <h6>
                                         <?php
-                                        $customers = $customer->countCustomers();
+                                        $customers = $customer->countCustomersThisMonth();
                                         echo $customers['total'];
                                         ?>
                                     </h6>
@@ -83,79 +84,57 @@
 
                 </div><!-- End Customers Card -->
 
-                <!-- Recent Sales -->
-                <div class="col-12">
-                    <div class="card recent-sales overflow-auto">
-
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="fa-solid fa-ellipsis"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
+                <!-- Recent Orders -->
+                <div class="col-sm-12">
+                    <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Recent Orders <span>| Today</span></h5>
+                            <h5 class="card-title">Recent Orders</h5>
 
-                            <table class="table table-borderless datatable">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row"><a href="#">#2457</a></th>
-                                    <td>Brandon Jacob</td>
-                                    <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                                    <td>$64</td>
-                                    <td><span class="badge bg-success">Approved</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2147</a></th>
-                                    <td>Bridie Kessler</td>
-                                    <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                    <td>$47</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2049</a></th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                    <td>$147</td>
-                                    <td><span class="badge bg-success">Approved</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2644</a></th>
-                                    <td>Angus Grady</td>
-                                    <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                    <td>$67</td>
-                                    <td><span class="badge bg-danger">Rejected</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2644</a></th>
-                                    <td>Raheem Lehner</td>
-                                    <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                    <td>$165</td>
-                                    <td><span class="badge bg-success">Approved</span></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped align-middle">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Table Number</th>
+                                        <th scope="col">Order Message</th>
+                                        <th scope="col">Order Code</th>
+                                        <th scope="col">Order Date</th>
+                                        <th scope="col">Grand Total</th>
+                                        <th scope="col">Order Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $orders = $order->getTopOrders();
+                                    if(count($orders) > 0){
+                                        foreach ($orders as $order) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $order['table_number']; ?></td>
+                                                <td><?php echo $order['order_message']; ?></td>
+                                                <td><?php echo $order['order_code']; ?></td>
+                                                <td><?php echo $order['order_date']; ?></td>
+                                                <td>NRS. <?php echo $order['grand_total']; ?></td>
+                                                <td><?php echo $order['order_status']; ?></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    }else{
+                                        ?>
+                                        <tr>
+                                            <td colspan="6">No recent orders found</td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
 
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                     </div>
-                </div><!-- End Recent Sales -->
+                </div><!-- End Recent Orders -->
 
             </div>
         </div><!-- End Left side columns -->
@@ -163,7 +142,7 @@
         <!-- Right side columns -->
         <div class="col-lg-4">
 
-            <?php include "recent-activity.php"?>
+            <?php include "recent-payment.php" ?>
 
         </div><!-- End Right side columns -->
 
