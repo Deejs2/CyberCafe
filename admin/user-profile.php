@@ -32,6 +32,7 @@
                             <p class="small fst-italic"><?php echo $user['bio'];?></p>
 
                             <h5 class="card-title">Profile Details</h5>
+                           
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
@@ -58,18 +59,18 @@
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                             <!-- Profile Edit Form -->
-                            <form method="editProfile.php" action="POST" enctype="multipart/form-data">
+                            <form method="post" action="editProfile.php" enctype="multipart/form-data">
                                 <div class="row mb-3">
                                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <img src="<?php echo $user['profile_pic'];?>" alt="Profile">
+                                        <img src="loads/<?= $user['profile_pic']; ?>" alt="ProfileImage" id="profileImage">
                                         <div class="pt-2">
                                     <!-- Hidden file input -->
-                                    <input type="file" id="fileInput" display="none"; onchange="previewImage(event)" />
+                                    <input type="file" id="fileInput" name="fileInput"  style="display:none;"/>
 
                                     <!-- Button that triggers the file input when clicked -->
                                     <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" onclick="document.getElementById('fileInput').click(); return false;"><i class="fa fa-upload"></i></a>
-                                     <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="fa fa-trash"></i></a>
+                                     <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image" onclick="document.getElementById('profileImage').src = ''; return false;"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -147,14 +148,15 @@
                             </form><!-- End Change Password Form -->
 
                             <script>
-function previewImage(event) {
+document.getElementById('fileInput').addEventListener('change', function(e) {
     var reader = new FileReader();
-    reader.onload = function() {
-        var output = document.getElementById('profileImage');
-        output.src = reader.result;
-    };
-    reader.readAsDataURL(event.target.files[0]);
-}
+
+    reader.onload = function(e) {
+        document.getElementById('profileImage').src = e.target.result;
+    }
+
+    reader.readAsDataURL(this.files[0]);
+});
 </script>
                         </div>
 

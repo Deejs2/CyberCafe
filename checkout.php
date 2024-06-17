@@ -30,8 +30,8 @@ if(isset($_POST['checkout'])){
     }
 
     if($paymentMethod == "esewa"){
-        header("Location: payment/esewa-pay.php");
-        exit();
+header("Location: payment/esewa/payment-request.php");
+     exit();
     }elseif ($paymentMethod == "khalti"){
         header("Location: payment/khalti/request.php");
         exit();
