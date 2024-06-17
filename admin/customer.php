@@ -1,3 +1,4 @@
+
 <div class="table-responsive">
     <table class="table shadow-sm p-3 mb-5 bg-body-tertiary rounded">
         <thead>
@@ -12,60 +13,33 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>Jane Smith</td>
-            <td>jane.smith@example.com</td>
-            <td>(555) 987-6543</td>
-            <td>456 Oak Ave, Townsville, USA</td>
-            <td>PayPal</td>
-            <td>Pending</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Bob Johnson</td>
-            <td>bob.johnson@example.com</td>
-            <td>(555) 234-5678</td>
-            <td>789 Pine Rd, Villageton, USA</td>
-            <td>Debit Card</td>
-            <td>Failed</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Alice Brown</td>
-            <td>alice.brown@example.com</td>
-            <td>(555) 876-5432</td>
-            <td>321 Cedar Lane, Hamletville, USA</td>
-            <td>Bank Transfer</td>
-            <td>Completed</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>David White</td>
-            <td>david.white@example.com</td>
-            <td>(555) 345-6789</td>
-            <td>654 Birch Blvd, Boroughburg, USA</td>
-            <td>Credit Card</td>
-            <td>Pending</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Eva Miller</td>
-            <td>eva.miller@example.com</td>
-            <td>(555) 789-0123</td>
-            <td>987 Maple Lane, Hamletsville, USA</td>
-            <td>PayPal</td>
-            <td>Failed</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Frank Davis</td>
-            <td>frank.davis@example.com</td>
-            <td>(555) 456-7890</td>
-            <td>101 Pineapple Ave, Orchardtown, USA</td>
-            <td>Debit Card</td>
-            <td>Completed</td>
-        </tr>
+            <?php
+            include "../database/DatabaseConnection.php";
+            // Select data from the customer table
+$sql = "SELECT tbl_customers.*, tbl_checkout.payment_method, tbl_checkout.payment_status 
+        FROM tbl_customers 
+        INNER JOIN tbl_checkout ON tbl_customers.customer_id = tbl_checkout.customer_id";
+$result = $connection->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["customer_id"] . "</td>";
+        echo "<td>" . $row["customer_name"] . "</td>";
+        echo "<td>" . $row["customer_email"] . "</td>";
+        echo "<td>" . $row["customer_phone"] . "</td>";
+        echo "<td>" . $row["customer_address"] . "</td>";
+        echo "<td>" . $row["payment_method"] . "</td>";
+        echo "<td>" . $row["payment_status"] . "</td>";
+        echo "</tr>";
+    }
+} else {
+    echo "0 results";
+}
+$connection->close();
+
+            ?>
 
         </tbody>
     </table>

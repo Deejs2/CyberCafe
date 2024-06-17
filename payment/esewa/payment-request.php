@@ -1,28 +1,54 @@
 <?php
+session_start();
+global $customer, $connection, $order;
+
+use model\Customer;
+use model\Order;
+
+include "../../database/DatabaseConnection.php";
+include "../../model/Customer.php";
+include "../../model/Order.php";
+
+$customer = new Customer($connection);
+$order = new Order($connection);
+
+$customerData = $customer->getCustomerInfo($_SESSION["customer_id"]);
+$orderData = $order->getOrdersByTable($_SESSION["table"]);
+
+$customerName = $customerData["customer_name"];
+$customerEmail = $customerData["customer_email"];
+$customerPhone = $customerData["customer_phone"];
+
+$orderId = $orderData["order_id"];
+$orderCode = $orderData["order_code"];
+$orderTotal = $orderData["grand_total"];
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+$amount = $orderTotal;
+$tax_amount = 10;
 
 
 $data = [
-    'amount' => "100",
-    'failure_url' => "https://google.com",
+    'amount' => $amount,
+    'tax_amount' => $tax_amount,
+    'total_amount' => $amount + $tax_amount,
+    'failure_url' => "http://localhost/cyberCafe/CyberCafe/payment/esewa/failure.php",
     'product_delivery_charge' => "0",
     'product_service_charge' => "0",
     'product_code' => "EPAYTEST",
     'signed_field_names' => "total_amount,transaction_uuid,product_code",
-    'success_url' => "https://esewa.com.np",
-    'tax_amount' => "10",
-    'total_amount' => "110",
-    'transaction_uuid' => "ab14a8f2b02c3",
 ];
+$data['transaction_uuid'] = bin2hex(random_bytes(16));
+$data['success_url'] = "http://localhost/cyberCafe/CyberCafe/payment/esewa/success.php";
 
-$message = $data['total_amount'] . $data['transaction_uuid'] . $data['product_code'];
+
+$message = "total_amount=" . $data['total_amount'] . ",transaction_uuid=" . $data['transaction_uuid'] . ",product_code=" . $data['product_code'];
 $secret = "8gBm/:&EnhH.1/q";
 $signature = hash_hmac('sha256', $message, $secret, true);
 $s = base64_encode($signature);
-
 $data['signature'] = $s;
+
 
 ?>
 <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
@@ -37,5 +63,12 @@ $data['signature'] = $s;
     <input type="hidden" name="failure_url" value="<?php echo $data['failure_url']; ?>">
     <input type="hidden" name="signed_field_names" value="<?php echo $data['signed_field_names']; ?>">
     <input type="hidden" name="signature" value="<?php echo $data['signature']; ?>">
-    <input type="submit" value="Submit">
+    <!-- <input type="submit" value="Submit"> -->
 </form>
+<script>
+function submitForm() {
+    document.forms[0].submit();
+}
+
+window.onload = submitForm;
+</script>
