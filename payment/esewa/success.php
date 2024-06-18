@@ -33,7 +33,7 @@ $checkout->setPaymentStatus($customer_id);
 
 
 // Store the redirect URL in a variable
-$redirectUrl = "http://localhost/cyberCafe/CyberCafe/?table=" . $table_id;
+$redirectUrl = "http://cybercafe.com/?table=" . $table_id;
 
 echo '<div id="customAlert" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #d4edda; padding: 20px; border-radius: 5px; z-index: 9999; display: none; width: 80%; max-width: 400px;">
     Payment with Esewa Successful.

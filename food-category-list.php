@@ -13,7 +13,7 @@ if(isset($_POST['addToCart']) && isset($_SESSION['table'])){
             text: 'Item added to cart successfully',
             icon: 'success'
         });</script>";
-        header("Refresh:3");
+        header("Refresh:2");
         exit();
     } else {
         echo "<script>Swal.fire({

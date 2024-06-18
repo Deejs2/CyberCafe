@@ -1,3 +1,4 @@
+<?php global$user; ?>
 <section class="section profile">
     <div class="row">
 
@@ -28,6 +29,10 @@
                         ?>
 
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <div>
+                                <h4 class="card-title">Profile</h4>
+                                <img src="loads/<?= $user['profile_pic']; ?>" alt="ProfileImage" class="rounded-circle" style="width: 100px; height: 100px;">
+                            </div>
                             <h5 class="card-title">About</h5>
                             <p class="small fst-italic"><?php echo $user['bio'];?></p>
 
