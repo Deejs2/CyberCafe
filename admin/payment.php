@@ -52,7 +52,9 @@ $payments = $payment->getPaymentDetails();
                     <td>${payment.order_code}</td>
                     <td>NRS ${payment.grand_total}</td>
                     <td>${payment.payment_method}</td>
-                    <td>${payment.payment_status}</td>
+                    <td>${payment.payment_status === "Completed" ? "<span class='badge bg-success'>Completed</span>" :
+                payment.payment_status === "Failed" ? "<span class='badge bg-danger'>Failed</span>" :
+                    "<span class='badge bg-warning'>Not Paid</span>"}</td>
                 </tr>
             `).join('');
         };

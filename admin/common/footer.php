@@ -1,3 +1,3 @@
 <div class="copyright">
-    &copy; Copyright <strong><span>CyberCafe</span></strong>. All Rights Reserved
+    &copy; 2024 <strong><span>CyberCafe</span></strong>. All Rights Reserved
 </div>

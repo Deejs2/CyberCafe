@@ -10,13 +10,13 @@
             <h3>Follow Us</h3>
             <p>Join us on social networks</p>
             <ul class="social-list">
-                <li class="social-list-item fs-4"><a href=""><i class="fa-brands fa-facebook text-white"></i></a></li>
-                <li class="social-list-item fs-4"><a href=""><i class="fa-brands fa-instagram text-white"></i></a></li>
-                <li class="social-list-item fs-4"><a href=""><i class="fa-brands fa-linkedin text-white"></i></a></li>
+                <li class="social-list-item fs-4"><a href="https://www.facebook.com"><i class="fa-brands fa-facebook text-white"></i></a></li>
+                <li class="social-list-item fs-4"><a href="https://www.instagram.com"><i class="fa-brands fa-instagram text-white"></i></a></li>
+                <li class="social-list-item fs-4"><a href="https://www.linkedin.com"><i class="fa-brands fa-linkedin text-white"></i></a></li>
             </ul>
         </div>
     </div>
     <div>
-        <p class="text-center">&copy; 2023 CyberCafe</p>
+        <p class="text-center">&copy; 2024 CyberCafe. All Rights Reserved.</p>
     </div>
 </footer>

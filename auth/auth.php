@@ -94,10 +94,6 @@ if (isset($_POST["send-otp"])) {
                 sendOtpMail($email, $subject, $message);
                 header("Location: ?page=auth&&action=otp-confirmation");
                 exit();
-                // Send OTP
-                sendOtpMail($email, $subject, $message);
-                header("Location: ?page=auth&&action=otp-confirmation");
-                exit();
             }else{
                 $error = "Failed to send OTP. Please try again.";
             }

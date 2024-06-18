@@ -1,10 +1,14 @@
+<?php
+global $user;
+$users = $user->getUserByEmail($_SESSION['email']);
+?>
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="?page=dashboard">
+            <a class="nav-link collapsed" href="?page=dashboard">
                 <i class="fa-solid fa-gauge-high"></i>
                 <span>Dashboard</span>
             </a>
@@ -53,38 +57,42 @@
             </ul>
         </li><!-- End Recent Orders Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa-solid fa-users"></i><span>User</span><i class="fa-solid fa-caret-down ms-auto"></i>
+        <?php
+        if($users['role']=="Administrator"){
+            echo "<li class='nav-item'>
+            <a class='nav-link collapsed' data-bs-target='#charts-nav' data-bs-toggle='collapse' href='#'>
+            <i class='fa-solid fa-users'></i><span>User</span><i class='fa-solid fa-caret-down ms-auto'></i>
             </a>
-            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id='charts-nav' class='nav-content collapse' data-bs-parent='#sidebar-nav'>
                 <li>
-                    <a href="?page=user&&action=user-request">
-                        <i class="fa-solid fa-user-plus fs-6"></i><span>User Request</span>
+                    <a href='?page=user&&action=user-request'>
+                        <i class='fa-solid fa-user-plus fs-6'></i><span>User Request</span>
                     </a>
                 </li>
                 <li>
-                    <a href="?page=user&&action=users">
-                        <i class="fa-regular fa-eye fs-6"></i><span>Users</span>
+                    <a href='?page=user&&action=users'>
+                        <i class='fa-regular fa-eye fs-6'></i><span>Users</span>
                     </a>
                 </li>
             </ul>
-        </li><!-- End Users Nav -->
+        </li><!-- End Users Nav -->";
+        }
+        ?>
 
         <li class="nav-item">
-            <a class="nav-link" href="?page=payment">
+            <a class="nav-link collapsed" href="?page=payment">
                 <i class="fa-solid fa-money-check-dollar"></i><span>Payment</span>
             </a>
         </li><!-- End Payment Nav -->
 
         <li class="nav-item">
-            <a class="nav-link" href="?page=promo-code">
+            <a class="nav-link collapsed" href="?page=promo-code">
                 <i class="fa-solid fa-magnifying-glass-chart fs-6"></i><span>Promocode</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="?page=customer">
+            <a class="nav-link collapsed" href="?page=customer">
                 <i class="fa-solid fa-people-group"></i><span>Customer</span>
             </a>
         </li><!-- End Customer Nav -->

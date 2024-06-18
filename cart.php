@@ -1,5 +1,16 @@
 <?php global $foodItem, $cart, $promo, $order;
-include "common/breadcrumb.php"?>
+include "common/breadcrumb.php";
+
+if(isset($_SESSION["cart_msg"])){
+    echo "<script>Swal.fire({
+        title: 'Success!',
+        text: '".$_SESSION["cart_msg"]."',
+        icon: 'success'
+    });</script>";
+    unset($_SESSION["cart_msg"]);
+}
+
+?>
 
 
 <?php

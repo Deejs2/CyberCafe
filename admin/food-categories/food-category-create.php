@@ -23,17 +23,22 @@ if (isset($_GET['action']) && $_GET['action'] == 'create') {
     }
 }
 ?>
-<div class="row">
-    <div class="col-md-6">
-        <form method="post">
-            <h3>Create Food Category</h3>
-            <div class="input-group mb-3">
-                <input type="text" name="category-name" class="form-control">
-                <button class="btn btn-outline-secondary" name="create-category" type="submit">Create</button>
+<div class="card overflow-auto">
+    <h5 class="card-title ps-3">Food Category Details</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post">
+                    <h3>Create Food Category</h3>
+                    <div class="input-group mb-3">
+                        <input type="text" name="category-name" class="form-control">
+                        <button class="btn btn-outline-secondary" name="create-category" type="submit">Create</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <?php include "food-categories/food-category-list.php" ?>
+            <div class="col-md-6">
+                <?php include "food-categories/food-category-list.php" ?>
+            </div>
+        </div>
     </div>
 </div>
