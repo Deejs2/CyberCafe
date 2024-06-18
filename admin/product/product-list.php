@@ -1,7 +1,9 @@
 
-  <div class="container mt-3">
-    <div class="table-responsive">
-        <table class="table table-striped align-middle">
+<div class="card overflow-auto">
+    <h5 class="card-title ps-3">Product Details</h5>
+    <div class="card-body">
+        <div class="table-responsive" style="max-height: 430px; overflow-y: scroll">
+            <table class="table table-responsive table-bordered table-striped align-middle">
             <thead>
                 <tr>
                     <th scope="col">S.No</th>
@@ -27,8 +29,8 @@
             <td><?= $food['food_item_description']; ?></td>
 
             <td><img class="image-fluid" src="product/uploads/<?= $food['food_item_image']; ?>" height="50px" alt="Product Image"></td>
-           
-           
+
+
             <td><?= $food['food_item_status']; ?></td>
             <td>NRS <?= $food['food_item_price']; ?></td>
             <td>
@@ -49,5 +51,6 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 

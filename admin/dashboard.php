@@ -115,7 +115,15 @@
                                                 <td><?php echo $order['order_code']; ?></td>
                                                 <td><?php echo $order['order_date']; ?></td>
                                                 <td>NRS. <?php echo $order['grand_total']; ?></td>
-                                                <td><?php echo $order['order_status']; ?></td>
+                                                <td><?php
+                                                    if($order['order_status']=="Served"){
+                                                        echo "<span class='badge bg-success'>Served</span>";
+                                                    }elseif($order['order_status']=="Cancelled"){
+                                                        echo "<span class='badge bg-danger'>Cancelled</span>";
+                                                    }else{
+                                                        echo "<span class='badge bg-warning'>Pending</span>";
+                                                    }
+                                                    ?></td>
                                             </tr>
                                             <?php
                                         }

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table shadow-sm p-4 mb-5 align-middle bg-body-tertiary text-center rounded">
+    <table class="table table-responsive table-bordered table-striped align-middle">
         <thead>
         <tr>
             <th scope='col'>#</th>

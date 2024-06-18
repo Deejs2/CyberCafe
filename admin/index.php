@@ -49,7 +49,7 @@ $payment = new Payment($connection);
 
     <title>Dashboard - CyberCafe</title>
 
-    <link href="../image/CyberCafe-white.png" rel="icon">
+    <link href="../image/CyberCafe.png" rel="icon">
     <link rel="stylesheet" href="../design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
 

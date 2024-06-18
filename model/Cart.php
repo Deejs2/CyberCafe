@@ -100,4 +100,13 @@ class Cart
         return $result->fetch_assoc();
     }
 
+    //update cart
+    public function updateCart($cartId, $quantity): bool
+    {
+        $sql = "UPDATE tbl_carts SET food_item_quantity = ? WHERE cart_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $quantity, $cartId);
+        return $stmt->execute();
+    }
+
 }

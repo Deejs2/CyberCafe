@@ -21,6 +21,7 @@ use model\FoodItem;
 use model\Cart;
 use model\Order;
 use model\Promocode;
+use model\User;
 
 include "model/FoodCategory.php";
 $category = new FoodCategory($connection);
@@ -41,6 +42,11 @@ $customer = new Customer($connection);
 
 include "model/Checkout.php";
 $checkout = new Checkout($connection);
+
+include "model/User.php";
+$user = new User($connection);
+
+include "mail-config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +56,7 @@ $checkout = new Checkout($connection);
     <title>CyberCafe | <?php echo ucfirst($page)?></title>
     <link rel="stylesheet" href="design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
+    <link rel="icon" href="image/CyberCafe.png" type="image/x-icon">
     <style>
         body {
             min-height: 75rem;
