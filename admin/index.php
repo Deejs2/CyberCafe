@@ -52,6 +52,23 @@ $payment = new Payment($connection);
     <link href="../image/CyberCafe-white.png" rel="icon">
     <link rel="stylesheet" href="../design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #main {
+            flex: 1 0 auto; /* This will allow the main content to grow and shrink as needed, but not shrink below its base size */
+        }
+
+        #footer {
+            flex-shrink: 0; /* This will prevent the footer from shrinking and thus it will stay at the bottom */
+        }
+    </style>
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -138,7 +155,10 @@ $payment = new Payment($connection);
 
 </main><!-- End #main -->
 
-<?php include "common/footer.php"?>
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <?php include "common/footer.php"?>
+</footer><!-- End Footer -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i></a>
 

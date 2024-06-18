@@ -19,7 +19,7 @@ $customer_id = $customerData['customer_id'];
 $checkout = new Checkout($connection); 
 // Update the status
 $checkout->setPaymentFailed($customer_id);
-$redirectUrl = "http://localhost/cyberCafe/CyberCafe/?page=checkout";
+$redirectUrl = "http://cybercafe.com/?page=checkout";
 
 echo '<div id="customAlert" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #f44336; padding: 20px; border-radius: 5px; z-index: 9999; display: none; width: 80%; max-width: 400px; font-size: 20px;">
        Payment with Esewa Unsuccessful.
@@ -40,4 +40,3 @@ setTimeout(function() {
     window.location.href = "' . $redirectUrl . '";
 }, 2000);
 </script>';
-?>

@@ -33,14 +33,14 @@ $data = [
     'amount' => $amount,
     'tax_amount' => $tax_amount,
     'total_amount' => $amount + $tax_amount,
-    'failure_url' => "http://localhost/cyberCafe/CyberCafe/payment/esewa/failure.php",
+    'failure_url' => "http://cybercafe.com/payment/esewa/failure.php",
     'product_delivery_charge' => "0",
     'product_service_charge' => "0",
     'product_code' => "EPAYTEST",
     'signed_field_names' => "total_amount,transaction_uuid,product_code",
 ];
 $data['transaction_uuid'] = bin2hex(random_bytes(16));
-$data['success_url'] = "http://localhost/cyberCafe/CyberCafe/payment/esewa/success.php";
+$data['success_url'] = "http://cybercafe.com/payment/esewa/success.php";
 
 
 $message = "total_amount=" . $data['total_amount'] . ",transaction_uuid=" . $data['transaction_uuid'] . ",product_code=" . $data['product_code'];

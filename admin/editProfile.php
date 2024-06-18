@@ -44,7 +44,8 @@ if (isset($_FILES['fileInput'])) {
 }
 $connection->close();
 
-header('Location: user-profile.php');
+header('Location: ../admin/?page=user-profile');
+exit();
 
 
   ?>

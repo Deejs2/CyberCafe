@@ -23,8 +23,8 @@ $payments = $payment->getTopPaymentDetails();
                             Status: <?php
                             if ($payment['payment_status']=="Completed"){
                                 echo "<span class='badge bg-success'>Completed</span>";
-                            }elseif ($payment['payment_status']=="Cancelled") {
-                                echo "<span class='badge bg-danger'>Cancelled</span>";
+                            }elseif ($payment['payment_status']=="Failed") {
+                                echo "<span class='badge bg-danger'>Failed</span>";
                             }else {
                                 echo "<span class='badge bg-warning'>Pending</span>";
                             }

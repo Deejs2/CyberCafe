@@ -67,7 +67,7 @@ if(isset($_POST['checkout'])){
 ?>
 
 <div class="container my-3 border shadow rounded-3 p-3">
-    <div class="table-responsive text-center">
+    <div class="table-responsive text-center h-50">
         <h2 class="my-3 p-3 bg-primary text-white">Your Cart</h2>
         <table class="table align-middle">
             <thead>
