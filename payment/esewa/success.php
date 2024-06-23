@@ -2,14 +2,19 @@
 <?php
 session_start();
 global $customer, $connection, $order;
+
+use model\Cart;
 use model\Checkout;
 use model\Customer;
-use model\Order;
+
 include "../../database/DatabaseConnection.php";
 include "../../model/Customer.php"; 
 include "../../model/Checkout.php";
+include "../../model/Cart.php";
 
 $customer = new Customer($connection);
+$cart = new Cart($connection);
+
 $customerData = $customer->getCustomerInfo($_SESSION["customer_id"]);
 
 
@@ -29,7 +34,7 @@ $table_id = $checkout_info['table_number'];
 // Update the status
 $checkout->setPaymentStatus($customer_id);
 
-
+$cart->emptyCart($_SESSION["table"]);
 
 
 // Store the redirect URL in a variable

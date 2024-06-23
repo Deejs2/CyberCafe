@@ -35,7 +35,11 @@ class Order
     // Function to retrieve all orders
     public function getOrders()
     {
-        $sql = "SELECT * FROM tbl_orders order by order_id desc";
+        $sql = "
+select * from tbl_orders
+inner join tbl_checkout on tbl_orders.order_code = tbl_checkout.order_code
+where tbl_checkout.payment_status = 'Completed' order by tbl_orders.order_id desc;
+";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }

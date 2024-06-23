@@ -100,7 +100,7 @@ if(isset($_POST['checkout'])){
                             <div class="col text-center">
                                 <input type="radio" value="esewa" class="btn-check" name="options-base" id="option6">
                                 <label class="btn fs-2" for="option6">
-                                    <img src="image/esewa-logo.jpg" class="w-100 h-50" alt="">
+                                    <img src="image/esewa-logo.png" class="w-100 h-50" alt="">
                                 </label>
                             </div>
                             <div class="col text-center">
@@ -150,7 +150,7 @@ if(isset($_POST['checkout'])){
                                 </td>
                                 <td>
                                     <div><?php echo $foodItems['food_item_name']; ?></div>
-                                    <small style="font-size: small">NRS.
+                                    <small style="font-size: small">NPR.
                                         <?php
                                         echo "$foodItems[food_item_price]" . " x " . "$food[food_item_quantity]" . "=" . $foodItems['food_item_price'] * $food['food_item_quantity'];
                                         ?>
@@ -168,7 +168,7 @@ if(isset($_POST['checkout'])){
             <ul class="list-group list-group-flush mt-2">
                 <li class="list-group-item d-flex justify-content-between align-items-center ps-2 bg-body-tertiary">
                     Grand Total
-                    <span>NRS. <?php
+                    <span>NPR. <?php
                         $orders = $order->getOrdersByTable($_SESSION['table']);
                         if ($orders && array_key_exists('grand_total', $orders)) {
                             echo $orders['grand_total'];

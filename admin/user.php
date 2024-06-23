@@ -22,7 +22,7 @@
         foreach ($users as $user){
             echo "<tr>
         <td>$i</td>
-        <td><img src='../image/$user[profile_pic]' alt='' class='img-fluid' width='60px'></td>
+        <td><img src='loads/$user[profile_pic]' alt='' class='img-fluid' width='60px'></td>
         <td>$user[fullname]</td>
         <td>$user[email]</td>
         <td>$user[address]</td>

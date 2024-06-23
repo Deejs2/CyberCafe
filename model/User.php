@@ -17,7 +17,7 @@ class User
         $role = "Staff";
 
         // Save the user to the database
-        $sql = "INSERT INTO tbl_users (fullname, email, address, phone, request_status, role, status) VALUES (?, ?, ?, ?, ?, ?, true)";
+        $sql = "INSERT INTO tbl_users (fullname, email, address, phone, request_status, role, status, created_at) VALUES (?, ?, ?, ?, ?, ?, true, now())";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssssss", $fullName, $email, $address, $contact_number, $request_status, $role);
         $stmt->execute();
@@ -84,7 +84,7 @@ class User
 
     public function checkUserExists($email): bool
     {
-        $sql = "SELECT * FROM tbl_users WHERE email = ?";
+        $sql = "SELECT * FROM tbl_users WHERE email = ? AND request_status = 'Approved'";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -121,10 +121,30 @@ class User
 
     public function getAllApprovedUser()
     {
-        $sql = "SELECT * FROM tbl_users WHERE request_status = 'Approved' ORDER BY created_at desc";
+        $sql = "SELECT * FROM tbl_users WHERE request_status = 'Approved' AND role = 'Staff' ORDER BY created_at desc";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
 
+    }
+
+    public function insertCafe($cafe_name, $cafe_address, $cafe_contact, $cafe_email, $cafe_password)
+    {
+        $hashed_password = password_hash($cafe_password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO tbl_users (
+            fullname, 
+            email, 
+            address, 
+            phone, 
+            password, 
+            role, 
+            status,
+            request_status,
+            created_at
+        ) VALUES (?, ?, ?, ?, ?, 'Administrator', true, 'Approved', now())";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sssss", $cafe_name, $cafe_email, $cafe_address, $cafe_contact, $hashed_password);
+        $stmt->execute();
+        $stmt->close();
     }
 
 }

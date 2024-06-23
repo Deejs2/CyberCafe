@@ -214,7 +214,7 @@ if (isset($_POST["register"])) {
             $subject = "CyberCafe | Registration Complete";
             $message = "You have successfully registered with CyberCafe. Please wait for the approval. we will notify via email. Thank you!";
             echo sendRegistrationMail($email, $subject, $message);
-            header("Location: ?page=auth&&action=login");
+            header("Location: ?page=auth&&action=register-success");
             exit();
         }
     }
@@ -254,6 +254,9 @@ switch ($page){
         }elseif($action=="otp-confirmation"){
             include "otp-confirmation.php";
             include "common/footer.php";
+            break;
+        }elseif ($action=="register-success") {
+            include "message.php";
             break;
         }else{
             // Check if the requested page file exists

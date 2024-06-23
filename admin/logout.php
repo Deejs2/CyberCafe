@@ -1,4 +1,4 @@
 <?php
 unset($_SESSION["email"]);
-header("Location: ../?page=menu");
+header("Location: ../auth/auth.php?page=auth");
 exit();

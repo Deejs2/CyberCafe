@@ -19,7 +19,7 @@ $payments = $payment->getTopPaymentDetails();
                     <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                     <div class="activity-content">
                         <p class="ps-2">
-                            Customer <?= $payment['customer_name']; ?> paid NRS. <?= $payment['grand_total']; ?> for table <?= $payment['table_number']; ?> (Order: <?= $payment['order_code']; ?>) using <?= $payment['payment_method']; ?>.
+                            Customer <?= $payment['customer_name']; ?> paid NPR. <?= $payment['grand_total']; ?> for table <?= $payment['table_number']; ?> (Order: <?= $payment['order_code']; ?>) using <?= $payment['payment_method']; ?>.
                             Status: <?php
                             if ($payment['payment_status']=="Completed"){
                                 echo "<span class='badge bg-success'>Completed</span>";

@@ -50,7 +50,7 @@ $payments = $payment->getPaymentDetails();
                     <td>${payment.customer_email}</td>
                     <td>${payment.table_number}</td>
                     <td>${payment.order_code}</td>
-                    <td>NRS ${payment.grand_total}</td>
+                    <td>NPR ${payment.grand_total}</td>
                     <td>${payment.payment_method}</td>
                     <td>${payment.payment_status === "Completed" ? "<span class='badge bg-success'>Completed</span>" :
                 payment.payment_status === "Failed" ? "<span class='badge bg-danger'>Failed</span>" :

@@ -44,7 +44,7 @@
                                     <i class="fa-solid fa-file-signature"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>NRS.
+                                    <h6>NPR.
                                         <?php
                                         $orders = $order->sumOrdersThisMonth();
                                         echo $orders['total'];
@@ -114,7 +114,7 @@
                                                 <td><?php echo $order['order_message']; ?></td>
                                                 <td><?php echo $order['order_code']; ?></td>
                                                 <td><?php echo $order['order_date']; ?></td>
-                                                <td>NRS. <?php echo $order['grand_total']; ?></td>
+                                                <td>NPR. <?php echo $order['grand_total']; ?></td>
                                                 <td><?php
                                                     if($order['order_status']=="Served"){
                                                         echo "<span class='badge bg-success'>Served</span>";

@@ -106,11 +106,15 @@ if($_GET['action'] == 'remove'&& isset($_GET['id'])) {
                                 </td>
                                 <?php
                             }else{
+                                if($user['role']=="Staff"){
                                 ?>
-                                <td>
-                                    <a href="?page=user-request&&action=remove&&id=<?php echo $user['user_id']; ?>" class="btn btn-danger">Remove</a>
-                                </td>
+                                    <td>
+                                        <a href="?page=user-request&&action=remove&&id=<?php echo $user['user_id']; ?>" class="btn btn-danger">Remove</a>
+                                    </td>
                                 <?php
+                                }else{
+                                    echo "<td></td>";
+                                }
                             }
                             ?>
                     </tr>

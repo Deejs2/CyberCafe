@@ -71,21 +71,17 @@ if(isset($_GET['setInActive'])){
 <div class="card overflow-auto">
     <h5 class="card-title ps-3">Customer Details</h5>
     <div class="card-body">
-        <form method="post">
+        <form method="post" class="mb-4">
             <div class="row">
-                <div class="col">
-                    <label>
-                        <input type="text" name="promoCode" class="form-control" placeholder="Promo Code">
-                        <?php if(isset($_GET["msg"]) && $_GET["msg"]=="promoCodeError") {echo "<span class='alert-danger'>Please enter a promo code!</span>";}?>
-                    </label>
-                </div>
-                <div class="col">
-                    <label>
-                        <input type="text" name="discountAmount" class="form-control" placeholder="Discount Amount">
-                        <?php if(isset($_GET["msg"]) && $_GET["msg"]=="discountAmountError") {echo "<span class='alert-danger'>Please enter a promo code discount!</span>";}?>
-                    </label>
-                </div>
-                <div class="col">
+                <label class="col-5">
+                    <input type="text" name="promoCode" class="form-control" placeholder="Promo Code">
+                    <?php if(isset($_GET["msg"]) && $_GET["msg"]=="promoCodeError") {echo "<span class='alert-danger'>Please enter a promo code!</span>";}?>
+                </label>
+                <label class="col-5">
+                    <input type="text" name="discountAmount" class="form-control" placeholder="Discount Amount">
+                    <?php if(isset($_GET["msg"]) && $_GET["msg"]=="discountAmountError") {echo "<span class='alert-danger'>Please enter a promo code discount!</span>";}?>
+                </label>
+                <div class="col-2">
                     <button type="submit" name="create_promo_code" class="btn btn-warning text-white">Create</button>
                 </div>
             </div>

@@ -17,7 +17,7 @@ class Payment
         c.customer_name, c.customer_email, cc.table_number, o.order_code, o.grand_total, cc.payment_method, cc.payment_status
         from tbl_customers as c
         inner join tbl_checkout as cc on c.customer_id = cc.customer_id
-        inner join tbl_orders as o on cc.order_code = o.order_code";
+        inner join tbl_orders as o on cc.order_code = o.order_code order by cc.checkout_id desc";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }

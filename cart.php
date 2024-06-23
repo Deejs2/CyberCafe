@@ -54,7 +54,6 @@ if(isset($_POST['checkout'])){
     $orders = $order->addOrder($_SESSION['table'],$grandTotal, $message);
     if($orders){
         $_SESSION['msg']= "<script>Swal.fire({
-            position: 'top-end',
             icon: 'success',
             title: 'Order placed successfully!',
             showConfirmButton: false,
@@ -65,7 +64,6 @@ if(isset($_POST['checkout'])){
         exit();
     }else{
         $_SESSION['msg']= "<script>Swal.fire({
-            position: 'top-end',
             icon: 'error',
             title: 'Failed to place order!',
             showConfirmButton: false,
@@ -108,8 +106,8 @@ if(isset($_POST['checkout'])){
                     <td><img src="admin/product/uploads/<?php echo $foodItems['food_item_image']; ?>" class="img-fluid" style="height: 100px; width: 130px" alt=""></td>
                     <td><?php echo $foodItems['food_item_name']; ?></td>
                     <td><?php echo $item['food_item_quantity']; ?></td>
-                    <td>NRS. <?php echo $foodItems['food_item_price']; ?></td>
-                    <td>NRS. <?php echo $item['food_item_total']; ?></td>
+                    <td>NPR. <?php echo $foodItems['food_item_price']; ?></td>
+                    <td>NPR. <?php echo $item['food_item_total']; ?></td>
                 </tr>
                 <?php
             }
@@ -155,14 +153,14 @@ if(isset($_POST['checkout'])){
                             <div class="fw-bold">Sub Total</div>
                             Total without discount & promo code
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">NRS. <?php if($cart->sumTotal($_SESSION['table'])['total']){echo $cart->sumTotal($_SESSION['table'])['total'];}else{echo 0;}?></span>
+                        <span class="badge text-bg-primary rounded-pill">NPR. <?php if($cart->sumTotal($_SESSION['table'])['total']){echo $cart->sumTotal($_SESSION['table'])['total'];}else{echo 0;}?></span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Discount</div>
-                            Spent above NRS. 800 and get 2% discount
+                            Spent above NPR. 800 and get 2% discount
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">NRS. <?php if($cart->sumTotal($_SESSION['table'])['total']>800){echo $cart->sumTotal($_SESSION['table'])['total']*0.02;}else{echo 0;} ?></span>
+                        <span class="badge text-bg-primary rounded-pill">NPR. <?php if($cart->sumTotal($_SESSION['table'])['total']>800){echo $cart->sumTotal($_SESSION['table'])['total']*0.02;}else{echo 0;} ?></span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
@@ -170,7 +168,7 @@ if(isset($_POST['checkout'])){
                             <?php if(isset($_POST['apply-promo-code'])){echo "Promo code applied";}else{echo "Apply promo code";} ?>
                         </div>
                         <span class="badge text-bg-primary rounded-pill">
-                            NRS. <?php
+                            NPR. <?php
                             if(isset($_POST['apply-promo-code'])){
                                 $promoCode = $_POST['promoCode'];
                                 $promoCodeDetails = $promo->getPromoCode($promoCode);
@@ -190,7 +188,7 @@ if(isset($_POST['checkout'])){
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Amount</div>
                         </div>
-                        <span>NRS.
+                        <span>NPR.
                             <?php
                                 $grandTotal = $cart->sumTotal($_SESSION['table'])['total'];
                                 if($cart->sumTotal($_SESSION['table'])['total']>800) {

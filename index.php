@@ -10,6 +10,7 @@ if(!isset($_SESSION["table"])){
     exit();
 }
 include "database/DatabaseConnection.php";
+
 $page = $_GET["page"] ?? "menu";
 $action = $_GET["action"] ?? "";
 $GLOBALS["menuLink"] = "?page=menu";
@@ -47,6 +48,7 @@ include "model/User.php";
 $user = new User($connection);
 
 include "mail-config.php";
+include_once "database/migration.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

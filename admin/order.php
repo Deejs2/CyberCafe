@@ -67,7 +67,7 @@ $orders = $order->getOrders();
                         <td>${order.order_message}</td>
                         <td>${order.order_code}</td>
                         <td>${order.order_date}</td>
-                        <td>NRS ${order.grand_total}</td>
+                        <td>NPR ${order.grand_total}</td>
                         <td>
                             ${order.order_status === "Served" ? "<span class='badge bg-success'>Served</span>" :
                     order.order_status === "Cancelled" ? "<span class='badge bg-danger'>Cancelled</span>" :
@@ -76,7 +76,6 @@ $orders = $order->getOrders();
                         <td>
                             ${order.order_status !== "Served" && order.order_status !== "Cancelled" ? `
                                 <a href="?page=order&&action=served&&order_id=${order.order_id}" class="btn btn-success">Served</a>
-                                <a href="?page=order&&action=cancel&&order_id=${order.order_id}" class="btn btn-danger">Cancel</a>
                             ` : ''}
                         </td>
                     </tr>

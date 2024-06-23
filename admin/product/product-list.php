@@ -21,10 +21,11 @@
               $foodItems = $product->getAllItems();
               ?>
                 <?php if ($foodItems){
+                    $i = 1;
                     foreach ($foodItems as $food){
                     ?>
                   <tr>
-            <th scope="row"><?= $food['food_item_id']; ?></th>
+            <th scope="row"><?= $i++ ?></th>
             <td><?= $food['food_item_name']; ?></td>
             <td><?= $food['food_item_description']; ?></td>
 
@@ -32,7 +33,7 @@
 
 
             <td><?= $food['food_item_status']; ?></td>
-            <td>NRS <?= $food['food_item_price']; ?></td>
+            <td>NPR <?= $food['food_item_price']; ?></td>
             <td>
                 <?php
                 $categories = $category->getCategoryById($food['food_category_id']);
