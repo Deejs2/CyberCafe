@@ -1,9 +1,13 @@
 <?php
+global $connection, $order;
 ob_start(); // Start output buffering
 session_start();
 
+use model\Customer;
 use model\FoodCategory;
 use model\FoodItem;
+use model\Order;
+use model\Payment;
 use model\User;
 use model\Promocode;
 
@@ -17,6 +21,10 @@ include "../model/FoodCategory.php";
 include "../model/FoodItem.php";
 include "../model/User.php";
 include "../model/Promocode.php";
+include "../model/Order.php";
+include "../model/Customer.php";
+include "../mail-config.php";
+include "../model/Payment.php";
 
 $GLOBALS["page"] = $page = $_GET["page"] ?? "dashboard";
 $action = $_GET["action"] ?? "";
@@ -27,6 +35,9 @@ $product = new FoodItem($connection);
 $categories = $category->getAllCategories();
 $user = new User($connection);
 $promo = new Promocode($connection);
+$order = new Order($connection);
+$customer = new Customer($connection);
+$payment = new Payment($connection);
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +49,30 @@ $promo = new Promocode($connection);
 
     <title>Dashboard - CyberCafe</title>
 
-    <link href="../image/CyberCafe-white.png" rel="icon">
+    <link href="../image/CyberCafe.png" rel="icon">
     <link rel="stylesheet" href="../design/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="design/css/style.css">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #main {
+            flex: 1 0 auto; /* This will allow the main content to grow and shrink as needed, but not shrink below its base size */
+        }
+
+        #footer {
+            flex-shrink: 0; /* This will prevent the footer from shrinking and thus it will stay at the bottom */
+        }
+    </style>
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 <?php include "common/header.php"?>
 
@@ -61,6 +89,10 @@ $promo = new Promocode($connection);
 
             case "customer":
                 include "customer.php";
+                break;
+
+            case "payment":
+                include "payment.php";
                 break;
 
             case "user":
@@ -89,7 +121,7 @@ $promo = new Promocode($connection);
                 break;
 
             case "recent-activity":
-                include "recent-activity.php";
+                include "recent-payment.php";
                 break;
 
             case "promo-code":
@@ -123,7 +155,10 @@ $promo = new Promocode($connection);
 
 </main><!-- End #main -->
 
-<?php include "common/footer.php"?>
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <?php include "common/footer.php"?>
+</footer><!-- End Footer -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i></a>
 

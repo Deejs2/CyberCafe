@@ -15,7 +15,7 @@ class Cart
     public function addItemToCart($foodItemId, $quantity, $tableNumber, $foodItemTotal): bool
     {
         // Prepare the SQL statement
-        $sql = "INSERT INTO tbl_carts (food_item_id, food_item_quantity, table_number, food_item_total) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO tbl_carts (food_item_id, food_item_quantity, table_number, food_item_total, cart_status) VALUES (?, ?, ?, ?, true)";
         $stmt = $this->conn->prepare($sql);
 
         // Bind the parameters
@@ -32,7 +32,7 @@ class Cart
     // Function to retrieve all items in the cart
     public function getCartItems($tableNumber)
     {
-        $sql = "SELECT * FROM tbl_carts WHERE table_number = ? order by cart_id desc";
+        $sql = "SELECT * FROM tbl_carts WHERE table_number = ? AND cart_status = true order by cart_id desc";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $tableNumber);
         $stmt->execute();
@@ -61,11 +61,52 @@ class Cart
     // Function to sum the food_item_total using table_number
     public function sumTotal($tableNumber)
     {
-        $sql = "SELECT SUM(food_item_total) as total FROM tbl_carts WHERE table_number = ?";
+        $sql = "SELECT SUM(food_item_total) as total FROM tbl_carts WHERE table_number = ? AND cart_status = true";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $tableNumber);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    //get cart by id
+    public function getCartById($cartId)
+    {
+        $sql = "SELECT * FROM tbl_carts WHERE cart_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $cartId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    //Empty cart for table number set status to false
+    public function emptyCart($tableNumber)
+    {
+        $sql = "UPDATE tbl_carts SET cart_status = false WHERE table_number = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $tableNumber);
+        return $stmt->execute();
+    }
+
+    //count cart items from table number
+    public function countCartItems($tableNumber)
+    {
+        $sql = "SELECT COUNT(cart_id) as total FROM tbl_carts WHERE table_number = ? AND cart_status = true";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $tableNumber);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    //update cart
+    public function updateCart($cartId, $quantity): bool
+    {
+        $sql = "UPDATE tbl_carts SET food_item_quantity = ? WHERE cart_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $quantity, $cartId);
+        return $stmt->execute();
+    }
+
 }

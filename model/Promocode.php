@@ -41,7 +41,7 @@ class Promocode
     public function deletePromoCode($promoId): bool
     {
         // Prepare the SQL statement
-        $sql = "UPDATE tbl_promo_codes SET promo_code_status=false WHERE promo_code_id = ?";
+        $sql = "DELETE FROM tbl_promo_codes WHERE promo_code_id = ?";
         $stmt = $this->conn->prepare($sql);
 
         // Bind the parameter
@@ -52,6 +52,54 @@ class Promocode
             return true; // Deletion successful
         } else {
             return false; // Deletion failed
+        }
+    }
+
+    // check if promo code exists
+
+    public function getPromoCode($promoCode)
+    {
+        $sql = "SELECT * FROM tbl_promo_codes WHERE promo_code = ? AND promo_code_status = true";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $promoCode);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    // set promo code active
+    public function setPromoCodeActive($promoId): bool
+    {
+        // Prepare the SQL statement
+        $sql = "UPDATE tbl_promo_codes SET promo_code_status = true WHERE promo_code_id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind the parameter
+        $stmt->bind_param("i", $promoId);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            return true; // Promo code activated successfully
+        } else {
+            return false; // Promo code activation failed
+        }
+    }
+
+    // set promo code inactive
+    public function setPromoCodeInactive($promoId): bool
+    {
+        // Prepare the SQL statement
+        $sql = "UPDATE tbl_promo_codes SET promo_code_status = false WHERE promo_code_id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind the parameter
+        $stmt->bind_param("i", $promoId);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            return true; // Promo code deactivated successfully
+        } else {
+            return false; // Promo code deactivation failed
         }
     }
 

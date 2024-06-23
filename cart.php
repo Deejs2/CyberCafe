@@ -1,5 +1,16 @@
-<?php global $foodItem, $cart;
-include "common/breadcrumb.php"?>
+<?php global $foodItem, $cart, $promo, $order;
+include "common/breadcrumb.php";
+
+if(isset($_SESSION["cart_msg"])){
+    echo "<script>Swal.fire({
+        title: 'Success!',
+        text: '".$_SESSION["cart_msg"]."',
+        icon: 'success'
+    });</script>";
+    unset($_SESSION["cart_msg"]);
+}
+
+?>
 
 
 <?php
@@ -36,9 +47,36 @@ if (isset($_SESSION['message'])) {
     echo $_SESSION['message'];
     unset($_SESSION['message']);
 }
+
+if(isset($_POST['checkout'])){
+    $message = $_POST["message"];
+    $grandTotal = $_POST["grand-total"];
+    $orders = $order->addOrder($_SESSION['table'],$grandTotal, $message);
+    if($orders){
+        $_SESSION['msg']= "<script>Swal.fire({
+            icon: 'success',
+            title: 'Order placed successfully!',
+            showConfirmButton: false,
+            timer: 1500
+        });</script>";
+
+        header("Location: ?page=checkout");
+        exit();
+    }else{
+        $_SESSION['msg']= "<script>Swal.fire({
+            icon: 'error',
+            title: 'Failed to place order!',
+            showConfirmButton: false,
+            timer: 1500
+        });</script>";
+
+    }
+}
+
 ?>
+
 <div class="container my-3 border shadow rounded-3 p-3">
-    <div class="table-responsive text-center">
+    <div class="table-responsive text-center h-50">
         <h2 class="my-3 p-3 bg-primary text-white">Your Cart</h2>
         <table class="table align-middle">
             <thead>
@@ -60,12 +98,16 @@ if (isset($_SESSION['message'])) {
                 ?>
                 <tr>
                     <th scope="row"><?php echo $i++; ?></th>
-                    <td><a href="?page=cart&action=delete&cartId=<?php echo $item['cart_id']; ?>" class="text-danger"><i class="fa-solid fa-trash"></i></a></td>
+                    <td>
+                        <a href="?page=cart&action=delete&cartId=<?php echo $item['cart_id']; ?>" class="text-danger me-2"><i class="fa-solid fa-trash"></i></a>
+                        <!-- Modal trigger -->
+                        <a href ="?page=cart&action=edit&cartId=<?php echo $item['cart_id']; ?>" class="text-primary"><i class="fa-solid fa-edit"></i></a>
+                    </td>
                     <td><img src="admin/product/uploads/<?php echo $foodItems['food_item_image']; ?>" class="img-fluid" style="height: 100px; width: 130px" alt=""></td>
                     <td><?php echo $foodItems['food_item_name']; ?></td>
                     <td><?php echo $item['food_item_quantity']; ?></td>
-                    <td>NRS. <?php echo $foodItems['food_item_price']; ?></td>
-                    <td>NRS. <?php echo $item['food_item_total']; ?></td>
+                    <td>NPR. <?php echo $foodItems['food_item_price']; ?></td>
+                    <td>NPR. <?php echo $item['food_item_total']; ?></td>
                 </tr>
                 <?php
             }
@@ -76,21 +118,31 @@ if (isset($_SESSION['message'])) {
             </tbody>
         </table>
     </div>
-    <div class="m-3">
+    <form method="post" class="m-3">
         <hr>
 
         <div class="row row-cols-1 row-cols-sm-2 text-start">
+            <form method="post">
             <div class="col">
-                <div class="input-group mb-3">
-                    <label>
-                        <input class="form-control" type="text" placeholder="Coupon Code">
-                    </label>
-                    <button class="input-group-text bg-primary"><span class="text-white">Apply</span></button>
+                <div class="mb-3">
+                    <div class="input-group">
+                        <label>
+                            <input class="form-control" name="promoCode" type="text" placeholder="Coupon Code">
+                        </label>
+                        <button type="submit" name="apply-promo-code" class="input-group-text bg-primary"><span class="text-white">Apply</span></button>
+                    </div>
+                    <?php
+                    if(isset($_POST['apply-promo-code'])){
+                        $promoCode = $_POST['promoCode'];
+                        $promoCodeDetails = $promo->getPromoCode($promoCode);
+                        if(!$promoCodeDetails){echo "<span class='text-danger'>Invalid Promo Code</span>";}
+                    }
+                    ?>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                    <label for="exampleFormControlTextarea1" class="form-label">Order Message</label>
                     <label class="input-group">
-                        <textarea class="form-control" placeholder="Message here" rows="3"></textarea>
+                        <textarea name="message" class="form-control" placeholder="Message here" rows="3"></textarea>
                     </label>
                 </div>
             </div>
@@ -101,35 +153,68 @@ if (isset($_SESSION['message'])) {
                             <div class="fw-bold">Sub Total</div>
                             Total without discount & promo code
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">NRS. <?php echo $cart->sumTotal($_SESSION['table'])['total'];?></span>
+                        <span class="badge text-bg-primary rounded-pill">NPR. <?php if($cart->sumTotal($_SESSION['table'])['total']){echo $cart->sumTotal($_SESSION['table'])['total'];}else{echo 0;}?></span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Discount</div>
-                            Special Discount
+                            Spent above NPR. 800 and get 2% discount
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">NRS. 10</span>
+                        <span class="badge text-bg-primary rounded-pill">NPR. <?php if($cart->sumTotal($_SESSION['table'])['total']>800){echo $cart->sumTotal($_SESSION['table'])['total']*0.02;}else{echo 0;} ?></span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Promo code</div>
-                            EXAMPLE CODE
+                            <?php if(isset($_POST['apply-promo-code'])){echo "Promo code applied";}else{echo "Apply promo code";} ?>
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">NRS. 50</span>
+                        <span class="badge text-bg-primary rounded-pill">
+                            NPR. <?php
+                            if(isset($_POST['apply-promo-code'])){
+                                $promoCode = $_POST['promoCode'];
+                                $promoCodeDetails = $promo->getPromoCode($promoCode);
+                                if($promoCodeDetails){
+                                    $discount = $promoCodeDetails['promo_code_discount'];
+                                    echo $discount;
+                                } else {
+                                    echo 0;
+                                }
+                            }else{
+                                echo 0;
+                            }
+                            ?>
+                        </span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Amount</div>
                         </div>
-                        <span>NRS. 190</span>
+                        <span>NPR.
+                            <?php
+                                $grandTotal = $cart->sumTotal($_SESSION['table'])['total'];
+                                if($cart->sumTotal($_SESSION['table'])['total']>800) {
+                                    $grandTotal -= $cart->sumTotal($_SESSION['table'])['total'] * 0.02;
+                                }
+                                if(isset($_POST['apply-promo-code'])){
+                                $promoCode = $_POST['promoCode'];
+                                $promoCodeDetails = $promo->getPromoCode($promoCode);
+                                    if($promoCodeDetails){
+                                        $discount = $promoCodeDetails['promo_code_discount'];
+                                        $grandTotal -= $discount;
+                                    }
+                                }
+                                echo $grandTotal;
+                            ?>
+                        </span>
+                        <label>
+                            <input name="grand-total" type="hidden" value="<?php echo $grandTotal;?>">
+                        </label>
                     </li>
                 </ol>
             </div>
         </div>
         <div class="button-group text-end mt-3">
-            <a class="btn bg-primary text-white" href=""><i class="fa-solid fa-pen-to-square"></i> Update Cart</a>
-            <a class="btn bg-success text-white" href="?page=checkout">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></a>
+            <button name="checkout" class="btn bg-primary text-white" type="submit">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
         </div>
-    </div>
+    </form>
 </div>
 

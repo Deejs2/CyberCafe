@@ -1,7 +1,14 @@
 
 <?php
 global$foodItem; global$cart; global$categories;
-include "common/menu-header.php"?>
+include "common/menu-header.php";
+
+if(isset($_SESSION['transaction_msg'])){
+    echo $_SESSION['transaction_msg'];
+    unset($_SESSION['transaction_msg']);
+}
+
+?>
 
 <?php
 if(isset($_POST['order']) && isset($_SESSION['table'])){
@@ -14,12 +21,16 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
         echo "<script>Swal.fire({
             title: 'Success!',
             text: 'Item added to cart successfully',
+            showConfirmButton: false,
             icon: 'success'
         });</script>";
+        header("Refresh:2");
+        exit();
     } else {
         echo "<script>Swal.fire({
             title: 'Error!',
             text: 'Failed to add item to cart',
+            showConfirmButton: false,
             icon: 'error'
         });</script>";
     }
@@ -40,7 +51,7 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
                     ?>
                     <div class="col">
                         <form method="post" class="card h-100">
-                            <img src="admin/product/uploads/<?php echo $food['food_item_image']?>" class="card-img-top" alt="...">
+                            <img src="admin/product/uploads/<?php echo $food['food_item_image']?>" class="card-img-top h-50" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title"><b><?php echo $food['food_item_name']; ?></b></h5>
                                 <p class="card-text"><?php echo $food['food_item_description']; ?></p>
@@ -52,10 +63,10 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
                                     <input type="number" name="quantity" min="1" max="20" class="form-control quantity-input" data-price="<?php echo $food['food_item_price']; ?>" value="1">
                                 </div>
                                 <div class="p-2">
-                                    <p class="card-text" id="card-text">Price: NRS<?php echo $food['food_item_price']; ?></p>
+                                    <p class="card-text" id="card-text">Price: NPR <?php echo $food['food_item_price']; ?></p>
                                 </div>
                                 <div class="mt-2 d-grid gap-2 d-md">
-                                    <button type="submit" name="order" class="btn bg-primary text-white order">Order</button>
+                                    <button type="submit" name="order" class="btn bg-primary text-white order">Add To Cart</button>
                                 </div>
                             </div>
                         </form>
@@ -78,7 +89,7 @@ if(isset($_POST['order']) && isset($_SESSION['table'])){
             let quantity = parseInt(this.value) || 1;
             let price = parseFloat(this.getAttribute('data-price'));
             let totalPrice = quantity * price;
-            this.closest('.card-body').querySelector('#card-text').textContent = "Price: NRS" + totalPrice.toFixed(2);
+            this.closest('.card-body').querySelector('#card-text').textContent = "Price: NPR" + totalPrice.toFixed(2);
         });
     });
 </script>

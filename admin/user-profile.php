@@ -1,9 +1,90 @@
+<?php global$user, $connection;
+
+if(isset($_POST['change-password'])){
+    $currentPassword = $_POST['password'];
+    $newPassword = $_POST['newpassword'];
+    $renewPassword = $_POST['renewpassword'];
+    $email = $_SESSION['email'];
+
+    $passwordErr = "";
+    if(empty($currentPassword) && empty($newPassword) && empty($renewPassword)){
+        $passwordErr = "All Fields are required for changing a password.";
+    }elseif (empty($currentPassword)) {
+        $passwordErr = "Please enter your current password.";
+    } elseif (empty($newPassword)) {
+        $passwordErr = "Please enter your new password.";
+    } elseif (empty($renewPassword)) {
+        $passwordErr = "Please re-enter your new password.";
+    }elseif ($newPassword != $renewPassword) {
+        $passwordErr = "New passwords do not match.";
+    }else {
+        $email = mysqli_real_escape_string($connection, $_SESSION['email']);
+        $sql = "SELECT password FROM tbl_users WHERE email = '$email'";
+        $result = $connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $password = $row['password'];
+
+            // Verify the current password
+            if (password_verify($currentPassword, $password)) {
+                // Passwords match, change the password
+                $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+                $sql = "UPDATE tbl_users SET password = '$newPasswordHash' WHERE email = '$email'";
+
+                if ($connection->query($sql) === TRUE) {
+                    echo "<script>
+                Swal.fire({
+                title: 'Password changed successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+                });
+                </script>";
+
+                } else {
+                    echo "<script>
+                Swal.fire({
+                title: 'Error changing password: ' . $connection->error',
+                icon: 'error',
+                confirmButtonText: 'OK'
+                });
+                </script>";
+                }
+            } else {
+                echo "<script>
+                Swal.fire({
+                title: 'Current password is incorrect.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+                });
+                </script>";
+            }
+        } else {
+            echo "<script>
+                Swal.fire({
+                title: 'No user found with that username.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+                });
+                </script>";
+        }
+    }
+
+
+}
+
+?>
 <section class="section profile">
     <div class="row">
 
         <div class="col-xl-12">
 
             <div class="card">
+                <?php if(isset($passwordErr)){
+                    echo "<div id='passwordErr' class='text-danger text-center py-3'>$passwordErr</div>";
+                    echo "<script>setTimeout(function(){document.getElementById('passwordErr').innerHTML = '';}, 5000);</script>";
+                } ?>
                 <div class="card-body pt-3">
                     <!-- Bordered Tabs -->
                     <ul class="nav nav-tabs nav-tabs-bordered">
@@ -28,10 +109,15 @@
                         ?>
 
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <div>
+                                <h4 class="card-title">Profile</h4>
+                                <img src="loads/<?= $user['profile_pic']; ?>" alt="ProfileImage" class="rounded-circle" style="width: 100px; height: 100px;">
+                            </div>
                             <h5 class="card-title">About</h5>
                             <p class="small fst-italic"><?php echo $user['bio'];?></p>
 
                             <h5 class="card-title">Profile Details</h5>
+
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
@@ -53,19 +139,28 @@
                                 <div class="col-lg-9 col-md-8"><?php echo $user['phone'];?></div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Account Status</div>
+                                <div class="col-lg-9 col-md-8"><?php if($user['status']){echo "Active";}?></div>
+                            </div>
+
                         </div>
 
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                             <!-- Profile Edit Form -->
-                            <form>
+                            <form method="post" action="editProfile.php" enctype="multipart/form-data">
                                 <div class="row mb-3">
                                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <img src="../image/dhiraj.png" alt="Profile">
+                                        <img src="loads/<?= $user['profile_pic']; ?>" alt="ProfileImage" id="profileImage">
                                         <div class="pt-2">
-                                            <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="fa fa-upload"></i></a>
-                                            <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="fa fa-trash"></i></a>
+                                    <!-- Hidden file input -->
+                                    <input type="file" id="fileInput" name="fileInput"  style="display:none;"/>
+
+                                    <!-- Button that triggers the file input when clicked -->
+                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" onclick="document.getElementById('fileInput').click(); return false;"><i class="fa fa-upload"></i></a>
+                                     <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image" onclick="document.getElementById('profileImage').src = ''; return false;"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,35 +168,35 @@
                                 <div class="row mb-3">
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                                        <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo $user['fullname'];?>">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                                        <textarea name="about" class="form-control" id="about" style="height: 100px"><?php echo $user['bio'];?></textarea>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $email; ?>">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $user['address'];?>">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
+                                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $user['phone'];?>">
                                     </div>
                                 </div>
 
@@ -114,8 +209,7 @@
 
                         <div class="tab-pane fade pt-3" id="profile-change-password">
                             <!-- Change Password Form -->
-                            <form>
-
+                            <form method ="POST">
                                 <div class="row mb-3">
                                     <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-md-8 col-lg-9">
@@ -138,10 +232,21 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                    <button type="submit" name="change-password" class="btn btn-primary">Change Password</button>
                                 </div>
                             </form><!-- End Change Password Form -->
 
+                            <script>
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        document.getElementById('profileImage').src = e.target.result;
+    }
+
+    reader.readAsDataURL(this.files[0]);
+});
+</script>
                         </div>
 
                     </div><!-- End Bordered Tabs -->

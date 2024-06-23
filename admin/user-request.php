@@ -1,26 +1,69 @@
 <?php
+global $user;
 if($_GET['action'] == 'approve'&& isset($_GET['id'])){
     $id = $_GET['id'];
     $user->approveUser($id);
+    $userDetail = $user->getUserById($id);
+
+    $hashed_password = password_hash($userDetail['fullname'].$userDetail['user_id'], PASSWORD_DEFAULT);
+    $user->userRequestApproval($id, $hashed_password);
+    userRequestMail(
+            $userDetail['email'],
+            "Request Approved",
+            "
+            Your request has been approved by the admin. You can now login to the system.
+            Login Credentials:
+            Email: ".$userDetail['email']."
+            Password: ".$userDetail['fullname'].$userDetail['user_id']."
+            "
+    );
     header("Location: ?page=user&&action=user-request");
+    exit();
 }
 
 if($_GET['action'] == 'reject'&& isset($_GET['id'])) {
     $id = $_GET['id'];
+    $userDetail = $user->getUserById($id);
     $user->rejectUser($id);
+    userRequestMail(
+        $userDetail['email'],
+        "Request Rejected",
+        "
+            Your request has been rejected by the admin. Please contact the admin for more information.
+            contact info:
+            Email: cybercafe@gmail.com
+            Phone: 1234567890
+            "
+    );
     header("Location: ?page=user&&action=user-request");
+    exit();
 }
 
 if($_GET['action'] == 'remove'&& isset($_GET['id'])) {
     $id = $_GET['id'];
+    $userDetail = $user->getUserById($id);
     $user->removeUser($id);
+    userRequestMail(
+        $userDetail['email'],
+        "Account Removed",
+        "
+            You have been removed from the system. Please contact the admin for more information.
+            contact info:
+            Email: cybercafe@gmail.com
+            Phone: 1234567890
+            "
+    );
     header("Location: ?page=user&&action=user-request");
+    exit();
 }
 ?>
 
+<div class="card">
+    <h5 class="card-title ps-3">User Request</h5>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-responsive table-bordered table-striped align-middle">
 
-<div class="table-responsive">
-    <table class="table align-middle text-center shadow-sm p-3 mb-5 bg-body-tertiary rounded">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -45,7 +88,15 @@ if($_GET['action'] == 'remove'&& isset($_GET['id'])) {
                         <td><?php echo $user['email']; ?></td>
                         <td><?php echo $user['address']; ?></td>
                         <td><?php echo $user['phone']; ?></td>
-                        <td><?php echo $user['request_status']; ?></td>
+                        <td>
+                        <?php if($user["request_status"]=="Approved"){
+                            echo "<span class='badge bg-success'>Approved</span>";
+                        }elseif($user["request_status"]=="Rejected"){
+                            echo "<span class='badge bg-danger'>Rejected</span>";
+                        }else{
+                            echo "<span class='badge bg-warning'>Pending</span>";
+                        } ?>
+                        </td>
                         <?php
                             if($user['request_status'] == "Pending"){
                                 ?>
@@ -55,11 +106,15 @@ if($_GET['action'] == 'remove'&& isset($_GET['id'])) {
                                 </td>
                                 <?php
                             }else{
+                                if($user['role']=="Staff"){
                                 ?>
-                                <td>
-                                    <a href="?page=user-request&&action=remove&&id=<?php echo $user['user_id']; ?>" class="btn btn-danger">Remove</a>
-                                </td>
+                                    <td>
+                                        <a href="?page=user-request&&action=remove&&id=<?php echo $user['user_id']; ?>" class="btn btn-danger">Remove</a>
+                                    </td>
                                 <?php
+                                }else{
+                                    echo "<td></td>";
+                                }
                             }
                             ?>
                     </tr>
@@ -72,3 +127,5 @@ if($_GET['action'] == 'remove'&& isset($_GET['id'])) {
         </tbody>
     </table>
 </div>
+    </div>
+    </div>
