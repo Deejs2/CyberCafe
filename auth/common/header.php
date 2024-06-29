@@ -6,6 +6,12 @@
     </a>
 
     <ul class="nav nav-pills pe-4">
+        <?php
+        if(isset($_SESSION["customer_id"])){
+            echo '<li class="nav-item"><a href="../?page=billing" class="nav-link"><i class="fa-solid fa-receipt text-white"></i>
+        <span class="text-white">Billing Info</span></a></li>';
+        }
+        ?>
         <a href="../?page=cart" type="button" class="position-relative nav-link">
             <i class="fa-solid fa-cart-plus text-white"></i><span
                     class="text-white"> Cart</span>

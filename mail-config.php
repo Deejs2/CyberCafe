@@ -1,7 +1,7 @@
 <?php
-ini_set('SMTP', 'smtp.zoho.com');
-ini_set('smtp_port', 465);
-ini_set('sendmail_from', 'jireldhiraj123@gmail.com');
+//ini_set('SMTP', 'smtp.zoho.com');
+//ini_set('smtp_port', 465);
+//ini_set('sendmail_from', 'jireldhiraj123@gmail.com');
 //$to = 'learner.letslearn00@gmail.com';
 //$subject = 'Test for title';
 //$message = 'Message to send';
