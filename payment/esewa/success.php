@@ -1,21 +1,29 @@
 
 <?php
 session_start();
+global$orderData; global$checkoutData; global$customerDetails;
 global $customer, $connection, $order;
 
 use model\Cart;
 use model\Checkout;
 use model\Customer;
+use model\Order;
 
 include "../../database/DatabaseConnection.php";
 include "../../model/Customer.php"; 
 include "../../model/Checkout.php";
 include "../../model/Cart.php";
+include "../../model/Order.php";
+include "../../mail-config.php";
 
 $customer = new Customer($connection);
 $cart = new Cart($connection);
+$checkout = new Checkout($connection);
+$order = new Order($connection);
 
 $customerData = $customer->getCustomerInfo($_SESSION["customer_id"]);
+$checkoutData = $checkout->getCheckoutInfo($_SESSION["customer_id"]);
+$orderData = $order->getOrdersByTable($_SESSION["table"]);
 
 
 // Get the customer_id
@@ -36,32 +44,30 @@ $checkout->setPaymentStatus($customer_id);
 
 $cart->emptyCart($_SESSION["table"]);
 
+sendPaymentDetailMail(
+    $customerData['customer_email'],
+    "Payment Confirmation",
+    "
+                    Dear ". $customerData['customer_name'] ."
+                    Your payment was successful. Thank you for choosing us.
+                    Order Details:
+                    Order Code : " . $checkoutData['order_code'] . "
+                    Payment Method : ". $checkoutData['payment_method'] ."
+                    Grand Total : ".$orderData['grand_total']."
+                    
+                    Thank you for choosing us.
+                    Regards,
+                    CyberCafe Team
+                    "
+);
+$_SESSION['transaction_msg'] = '<script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "Transaction successful.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    </script>';
 
-// Store the redirect URL in a variable
-$redirectUrl = "http://cybercafe.com/?table=" . $table_id;
-
-echo '<div id="customAlert" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #d4edda; padding: 20px; border-radius: 5px; z-index: 9999; display: none; width: 80%; max-width: 400px;">
-    Payment with Esewa Successful.
-</div>
-<style>
-@media (max-width: 600px) {
-    #customAlert {
-        width: 90%;
-    }
-}
-</style>
-<script>
-// Show the custom alert
-document.getElementById("customAlert").style.display = "block";
-
-// Redirect to the menu page after 2 seconds
-setTimeout(function() {
-    window.location.href = "' . $redirectUrl . '";
-}, 2000);
-</script>';
-?>
-
-
-
-
- 
+header("Location: ../../?page=billing");
+exit();

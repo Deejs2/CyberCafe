@@ -85,7 +85,7 @@ if ($pidx) {
                     </script>';
 
 
-                header("Location: ../../?page=menu");
+                header("Location: ../../?page=billing");
                 exit();
                 // Replace with your actual business logic
                 break;

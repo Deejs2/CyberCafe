@@ -15,6 +15,7 @@ $page = $_GET["page"] ?? "menu";
 $action = $_GET["action"] ?? "";
 $GLOBALS["menuLink"] = "?page=menu";
 
+use model\Billing;
 use model\Checkout;
 use model\Customer;
 use model\FoodCategory;
@@ -49,6 +50,9 @@ $user = new User($connection);
 
 include "mail-config.php";
 include_once "database/migration.php";
+
+include "model/Billing.php";
+$billing = new Billing($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +70,9 @@ include_once "database/migration.php";
         }
     </style>
 </head>
+<!-- Load the jspdf and jspdf-autotable libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/jspdf-autotable@3.5.13/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
@@ -95,6 +102,9 @@ switch($page){
         include "checkout.php";
         break;
 
+    case "billing":
+        include "billing.php";
+        break;
 
 
     default:
@@ -111,7 +121,23 @@ switch($page){
 
 <?php include "common/footer.php"?>
 
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('download').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const billingDetails = document.getElementById('billing-details');
+
+            // Use the autoTable plugin to add the table to the PDF
+            doc.autoTable({html: billingDetails});
+
+            doc.save('order-details.pdf');
+        });
+    });
+</script>
+
 </body>
 <script src="https://kit.fontawesome.com/cbeb993ef9.js" crossorigin="anonymous"></script>
 <script src="design/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </html>
